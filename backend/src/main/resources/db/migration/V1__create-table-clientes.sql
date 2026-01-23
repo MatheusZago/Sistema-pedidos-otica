@@ -1,9 +1,13 @@
+CREATE SEQUENCE clientes_id_seq
+    START WITH 1
+    INCREMENT BY 1;
+
 CREATE TABLE clientes (
-    id SERIAL PRIMARY KEY,
-    nome TEXT NOT NULL,
-    telefone TEXT NOT NULL,
-    email TEXT,
-    foto TEXT,
-    created_at TIMESTAMP NOT NULL,
+    id INTEGER PRIMARY KEY NOT NULL DEFAULT nextval('clientes_id_seq'),
+    nome VARCHAR(100) NOT NULL,
+    telefone VARCHAR(11) NOT NULL,
+    email VARCHAR(80),
+    foto VARCHAR(255),
+    created_at TIMESTAMP,
     updated_at TIMESTAMP
-);
+)
