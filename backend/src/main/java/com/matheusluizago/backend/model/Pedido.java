@@ -73,4 +73,124 @@ public class Pedido {
     @LastModifiedDate
     @Column(name = "updated_at")
     private LocalDateTime dateUpdate;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Cliente getClienteId() {
+        return clienteId;
+    }
+
+    public void setClienteId(Cliente clienteId) {
+        this.clienteId = clienteId;
+    }
+
+    public Laboratorio getLaboratorioId() {
+        return laboratorioId;
+    }
+
+    public void setLaboratorioId(Laboratorio laboratorioId) {
+        this.laboratorioId = laboratorioId;
+    }
+
+    public BigDecimal getCusto() {
+        return custo;
+    }
+
+    public void setCusto(BigDecimal custo) {
+        this.custo = custo;
+    }
+
+    public String getArmacao() {
+        return armacao;
+    }
+
+    public void setArmacao(String armacao) {
+        this.armacao = armacao;
+    }
+
+    public String getImgArmacao() {
+        return imgArmacao;
+    }
+
+    public void setImgArmacao(String imgArmacao) {
+        this.imgArmacao = imgArmacao;
+    }
+
+    public BigDecimal getOd() {
+        return od;
+    }
+
+    public void setOd(BigDecimal od) {
+        this.od = od;
+    }
+
+    public BigDecimal getOe() {
+        return oe;
+    }
+
+    public void setOe(BigDecimal oe) {
+        this.oe = oe;
+    }
+
+    public BigDecimal getAd() {
+        return ad;
+    }
+
+    public void setAd(BigDecimal ad) {
+        this.ad = ad;
+    }
+
+    public BigDecimal getDnp() {
+        return dnp;
+    }
+
+    public void setDnp(BigDecimal dnp) {
+        this.dnp = dnp;
+    }
+
+    public String getTratamento() {
+        return tratamento;
+    }
+
+    public void setTratamento(String tratamento) {
+        this.tratamento = tratamento;
+    }
+
+    public String getTipoLente() {
+        return tipoLente;
+    }
+
+    public void setTipoLente(String tipoLente) {
+        this.tipoLente = tipoLente;
+    }
+
+    public LocalDateTime getDataEntrega() {
+        return dataEntrega;
+    }
+
+    public void setDataEntrega(LocalDateTime dataEntrega) {
+        this.dataEntrega = dataEntrega;
+    }
+
+    public LocalDateTime getDateRegister() {
+        return dateRegister;
+    }
+
+    public void setDateRegister(LocalDateTime dateRegister) {
+        this.dateRegister = dateRegister;
+    }
+
+    public LocalDateTime getDateUpdate() {
+        return dateUpdate;
+    }
+
+    public void setDateUpdate(LocalDateTime dateUpdate) {
+        this.dateUpdate = dateUpdate;
+    }
 }
