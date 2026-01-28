@@ -1,9 +1,8 @@
 package com.matheusluizago.backend.controller;
 
-import com.matheusluizago.backend.model.Cliente;
+import com.matheusluizago.backend.dto.LaboratorioRegisterDto;
 import com.matheusluizago.backend.model.Laboratorio;
 import com.matheusluizago.backend.service.LaboratorioService;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.Optional;
 
-@Slf4j
+
 @RestController
 @RequestMapping("/laboratorios")
 public class LaboratorioController {
@@ -27,10 +26,10 @@ public class LaboratorioController {
     }
 
     @PostMapping
-    public ResponseEntity<Laboratorio> save(@RequestBody Laboratorio laboratorio){
-        log.info("Registrando novo laboratório: {}", laboratorio.getNome());
+    public ResponseEntity<Laboratorio> save(@RequestBody LaboratorioRegisterDto labDto){
+        log.info("Registrando novo laboratório: {}", labDto.nome());
 
-        Laboratorio saved = service.save(laboratorio);
+        Laboratorio saved = service.save(labDto);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()

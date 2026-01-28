@@ -25,11 +25,11 @@ public class Pedido {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id", nullable = false)
-    private Cliente clienteId;
+    private Cliente cliente;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "laboratorio_id", nullable = false)
-    private Laboratorio laboratorioId;
+    private Laboratorio laboratorio;
 
     @Column(precision = 10, scale = 2, nullable = false)
     private BigDecimal custo;
@@ -82,20 +82,20 @@ public class Pedido {
         this.id = id;
     }
 
-    public Cliente getClienteId() {
-        return clienteId;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setClienteId(Cliente clienteId) {
-        this.clienteId = clienteId;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    public Laboratorio getLaboratorioId() {
-        return laboratorioId;
+    public Laboratorio laboratorio() {
+        return laboratorio;
     }
 
-    public void setLaboratorioId(Laboratorio laboratorioId) {
-        this.laboratorioId = laboratorioId;
+    public void setLaboratorio(Laboratorio laboratorio) {
+        this.laboratorio = laboratorio;
     }
 
     public BigDecimal getCusto() {

@@ -1,5 +1,6 @@
 package com.matheusluizago.backend.controller;
 
+import com.matheusluizago.backend.dto.ClienteRegisterDto;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.service.ClienteService;
 import org.slf4j.Logger;
@@ -24,10 +25,10 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> save(@RequestBody Cliente cliente){
-        log.info("Registrando novo cliente: {}", cliente.getNome());
+    public ResponseEntity<Cliente> save(@RequestBody ClienteRegisterDto clienteDto){
+        log.info("Registrando novo cliente: {}", clienteDto.nome());
 
-        Cliente saved = service.save(cliente);
+        Cliente saved = service.save(clienteDto);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -43,6 +44,14 @@ public class ClienteController {
         Optional<Cliente> cliente = service.getById(id);
 
          return ResponseEntity.ok(cliente);
+    }
+
+    //TODO Arrumar para que lide com espaços no nome
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<Optional<Cliente>> getByNome(@PathVariable("nome") String nome){
+        Optional<Cliente> cliente = service.getByNome(nome);
+
+        return ResponseEntity.ok(cliente);
     }
 
 }
