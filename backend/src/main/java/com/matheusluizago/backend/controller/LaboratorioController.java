@@ -1,6 +1,9 @@
 package com.matheusluizago.backend.controller;
 
+import com.matheusluizago.backend.dto.ClienteResponseDto;
 import com.matheusluizago.backend.dto.LaboratorioRegisterDto;
+import com.matheusluizago.backend.dto.LaboratorioResponseDto;
+import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.model.Laboratorio;
 import com.matheusluizago.backend.service.LaboratorioService;
 import org.slf4j.Logger;
@@ -10,7 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -40,11 +45,16 @@ public class LaboratorioController {
         return ResponseEntity.created(location).body(saved);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Optional<Laboratorio>> getById(@PathVariable("id")int id){
-        Optional<Laboratorio> laboratorio = service.getById(id);
+    @GetMapping
+    public ResponseEntity<List<LaboratorioResponseDto>> search(
+            @RequestParam(value = "id", required = false) Integer id,
+            @RequestParam(value = "nome", required = false) String nome,
+            @RequestParam(value = "endereco", required = false) String endereco
+    ){
 
-        return ResponseEntity.ok(laboratorio);
+        List<LaboratorioResponseDto> list = service.searchByExample(id, nome, endereco);
+
+        return ResponseEntity.ok(list);
     }
 
 

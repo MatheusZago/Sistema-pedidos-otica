@@ -1,11 +1,15 @@
 package com.matheusluizago.backend.service;
 
 import com.matheusluizago.backend.dto.ClienteRegisterDto;
+import com.matheusluizago.backend.dto.ClienteResponseDto;
 import com.matheusluizago.backend.mapper.ClienteMapper;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.repository.ClienteRepository;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,11 +29,25 @@ public class ClienteService {
         return repository.save(cliente);
     }
 
-    public Optional<Cliente> getById(int id) {
-        return Optional.of(repository.getById(id));
-    }
+    public List<ClienteResponseDto> searchByExample(Integer id, String nome, String telefone, String email) {
+        var cliente = new Cliente();
+        cliente.setId(id);
+        cliente.setNome(nome);
+        cliente.setTelefone(telefone);
+        cliente.setEmail(email);
 
-    public Optional<Cliente> getByNome(String nome) {
-        return Optional.of(repository.getByNome(nome));
+        ExampleMatcher matcher = ExampleMatcher
+                .matching()
+                .withIgnoreNullValues()
+                .withIgnoreCase()
+                .withIgnorePaths("foto")
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING); //Nn precisa ser o falor exato, se tiver lá
+
+        Example<Cliente> clienteExample = Example.of(cliente, matcher);
+
+        return repository.findAll(clienteExample)
+                .stream()
+                .map(mapper::toDto)
+                .toList();
     }
 }

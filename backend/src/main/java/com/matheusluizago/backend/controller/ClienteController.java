@@ -1,6 +1,8 @@
 package com.matheusluizago.backend.controller;
 
 import com.matheusluizago.backend.dto.ClienteRegisterDto;
+import com.matheusluizago.backend.dto.ClienteResponseDto;
+import com.matheusluizago.backend.mapper.ClienteMapper;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.service.ClienteService;
 import org.slf4j.Logger;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -18,10 +22,12 @@ import java.util.Optional;
 public class ClienteController {
 
     private final ClienteService service;
+    private final ClienteMapper mapper;
     private final Logger log = LoggerFactory.getLogger(ClienteController.class);
 
-    public ClienteController(ClienteService service){
+    public ClienteController(ClienteService service, ClienteMapper mapper){
         this.service = service;
+        this.mapper = mapper;
     }
 
     @PostMapping
@@ -39,19 +45,18 @@ public class ClienteController {
         return ResponseEntity.created(location).body(saved);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Optional<Cliente>> getById(@PathVariable("id")int id){
-        Optional<Cliente> cliente = service.getById(id);
+    @GetMapping
+    public ResponseEntity<List<ClienteResponseDto>> search(
+            @RequestParam(value = "id", required = false) Integer id,
+            @RequestParam(value = "nome", required = false) String nome,
+            @RequestParam(value = "telefone", required = false) String telefone,
+            @RequestParam(value = "email", required = false) String email
+    ){
 
-         return ResponseEntity.ok(cliente);
+        List<ClienteResponseDto> result = service.searchByExample(id, nome, telefone, email);
+
+        return ResponseEntity.ok(result);
     }
 
-    //TODO Arrumar para que lide com espaços no nome
-    @GetMapping("/nome/{nome}")
-    public ResponseEntity<Optional<Cliente>> getByNome(@PathVariable("nome") String nome){
-        Optional<Cliente> cliente = service.getByNome(nome);
-
-        return ResponseEntity.ok(cliente);
-    }
 
 }
