@@ -1,5 +1,7 @@
 package com.matheusluizago.backend.controller;
 
+import com.matheusluizago.backend.dto.PedidoRegisterDto;
+import com.matheusluizago.backend.dto.PedidoResponseDto;
 import com.matheusluizago.backend.model.Pedido;
 import com.matheusluizago.backend.service.PedidoService;
 import org.slf4j.Logger;
@@ -8,8 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.math.BigDecimal;
 import java.net.URI;
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/pedidos")
@@ -24,10 +27,9 @@ public class PedidoController {
     }
 
     @PostMapping
-    public ResponseEntity<Pedido> save(@RequestBody Pedido pedido){
-        log.info("Registrando novo laboratório: {}", pedido.getArmacao());
+    public ResponseEntity<Pedido> save(@RequestBody PedidoRegisterDto dto){
 
-        Pedido saved = service.save(pedido);
+        Pedido saved = service.save(dto);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -38,10 +40,25 @@ public class PedidoController {
         return ResponseEntity.created(location).body(saved);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Optional<Pedido>> getById(@PathVariable("id")int id){
-        Optional<Pedido> pedido = service.getById(id);
+    @GetMapping
+    public ResponseEntity<List<PedidoResponseDto>> searchByExample(
+            @RequestParam(value = "id", required = false) Integer id,
+            @RequestParam(value = "clienteId", required = false) Integer clienteId,
+            @RequestParam(value = "laboratorioId", required = false) Integer labId,
+            @RequestParam(value = "custo", required = false) BigDecimal custo,
+            @RequestParam(value = "armacao", required = false) String armacao,
+            @RequestParam(value = "od", required = false) BigDecimal od,
+            @RequestParam(value = "oe", required = false) BigDecimal oe,
+            @RequestParam(value = "ad", required = false) BigDecimal ad,
+            @RequestParam(value = "dnp", required = false) BigDecimal dnp,
+            @RequestParam(value = "tratamento", required = false) String tratamento,
+            @RequestParam(value = "tipoLente", required = false) String tipoLente
 
-        return ResponseEntity.ok(pedido);
+    ) {
+        List<PedidoResponseDto> list = service.searchByExample(id, clienteId, labId, custo, armacao, od, oe, ad, dnp, tratamento, tipoLente);
+
+        return ResponseEntity.ok(list);
     }
+
+
 }

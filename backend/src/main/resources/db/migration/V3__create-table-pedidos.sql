@@ -17,7 +17,6 @@ CREATE TABLE pedidos (
     dnp DECIMAL(5,2),
     tratamento VARCHAR(120),
     tipo_lente VARCHAR(50),
-    status VARCHAR(30) NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP,
     CONSTRAINT fk_pedido_cliente

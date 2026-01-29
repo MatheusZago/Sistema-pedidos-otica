@@ -53,7 +53,6 @@ public class Pedido {
     private BigDecimal ad;
 
     //Distãncia Naso Pupilar
-
     @Column(precision = 5, scale = 2)
     private BigDecimal dnp;
 
@@ -90,7 +89,7 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public Laboratorio laboratorio() {
+    public Laboratorio getLaboratorio() {
         return laboratorio;
     }
 

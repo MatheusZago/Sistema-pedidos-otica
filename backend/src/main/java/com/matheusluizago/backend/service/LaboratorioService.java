@@ -30,10 +30,6 @@ public class LaboratorioService {
         return repository.save(lab);
     }
 
-    public Optional<Laboratorio> getById(int id) {
-        return repository.findById(id);
-    }
-
     public List<LaboratorioResponseDto> searchByExample(Integer id, String nome, String endereco) {
         var lab = new Laboratorio();
         lab.setId(id);

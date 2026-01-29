@@ -46,7 +46,7 @@ public class LaboratorioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<LaboratorioResponseDto>> search(
+    public ResponseEntity<List<LaboratorioResponseDto>> searchByExample(
             @RequestParam(value = "id", required = false) Integer id,
             @RequestParam(value = "nome", required = false) String nome,
             @RequestParam(value = "endereco", required = false) String endereco
@@ -56,6 +56,8 @@ public class LaboratorioController {
 
         return ResponseEntity.ok(list);
     }
+
+
 
 
 }

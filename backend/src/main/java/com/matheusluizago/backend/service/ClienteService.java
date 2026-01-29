@@ -43,7 +43,7 @@ public class ClienteService {
                 .withIgnorePaths("foto")
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING); //Nn precisa ser o falor exato, se tiver lá
 
-        Example<Cliente> clienteExample = Example.of(cliente, matcher);
+        Example<Cliente> clienteExample = Example.of(cliente, matcher); 
 
         return repository.findAll(clienteExample)
                 .stream()

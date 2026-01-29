@@ -1,6 +1,7 @@
 package com.matheusluizago.backend.mapper;
 
 import com.matheusluizago.backend.dto.PedidoRegisterDto;
+import com.matheusluizago.backend.dto.PedidoResponseDto;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.model.Laboratorio;
 import com.matheusluizago.backend.model.Pedido;
@@ -28,5 +29,27 @@ public class PedidoMapper {
         pedido.setTipoLente(dto.tipoLente());
 
         return pedido;
+    }
+
+    public PedidoResponseDto toDto(Pedido pedido){
+
+        return new PedidoResponseDto(
+                pedido.getId(),
+                pedido.getCliente().getId(),
+                pedido.getCliente().getNome(),
+                pedido.getCliente().getFoto(),
+                pedido.getLaboratorio().getId(),
+                pedido.getLaboratorio().getNome(),
+                pedido.getCusto(),
+                pedido.getArmacao(),
+                pedido.getOd(),
+                pedido.getOe(),
+                pedido.getAd(),
+                pedido.getDnp(),
+                pedido.getTratamento(),
+                pedido.getTipoLente(),
+                pedido.getDateRegister()
+        );
+
     }
 }
