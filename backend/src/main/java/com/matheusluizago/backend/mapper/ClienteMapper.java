@@ -27,4 +27,21 @@ public class ClienteMapper {
                 cliente.getTelefone(),
                 cliente.getFoto());
     }
+
+    public void updateCliente(Cliente cliente, ClienteRegisterDto dto){
+
+        if(dto.nome() != null) {
+            cliente.setNome(dto.nome());
+        }
+
+        if(dto.email() != null){
+            cliente.setEmail(dto.email());
+        }
+        if(dto.telefone() != null){
+            cliente.setTelefone(dto.telefone());
+        }
+        if(dto.foto() != null){
+            cliente.setFoto(dto.foto());
+        }
+    }
 }

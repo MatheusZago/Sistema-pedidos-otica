@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PedidoMapper {
 
+
     public Pedido toEntity(
             PedidoRegisterDto dto,
             Cliente cliente,
@@ -50,6 +51,40 @@ public class PedidoMapper {
                 pedido.getTipoLente(),
                 pedido.getDateRegister()
         );
+    }
+
+    public void updatePedido(Pedido pedido, PedidoRegisterDto dto, Cliente cliente, Laboratorio laboratorio){
+
+        if(dto.clienteId() != null){
+            pedido.setCliente(cliente);
+        }
+        if(dto.laboratorioId() != null){
+            pedido.setLaboratorio(laboratorio);
+        }
+        if(dto.custo() != null){
+            pedido.setCusto(dto.custo());
+        }
+        if(dto.armacao() != null){
+            pedido.setArmacao(dto.armacao());
+        }
+        if(dto.od() != null){
+            pedido.setOd(dto.od());
+        }
+        if(dto.oe() != null){
+            pedido.setOd(dto.oe());
+        }
+        if(dto.ad() != null){
+            pedido.setAd(dto.ad());
+        }
+        if(dto.dnp() != null){
+            pedido.setDnp(dto.dnp());
+        }
+        if(dto.tratamento() != null){
+            pedido.setTratamento(dto.tratamento());
+        }
+        if(dto.tipoLente() != null){
+            pedido.setTipoLente(dto.tipoLente());
+        }
 
     }
 }

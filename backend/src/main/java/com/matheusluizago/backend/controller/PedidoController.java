@@ -1,5 +1,7 @@
 package com.matheusluizago.backend.controller;
 
+import com.matheusluizago.backend.dto.LaboratorioRegisterDto;
+import com.matheusluizago.backend.dto.LaboratorioResponseDto;
 import com.matheusluizago.backend.dto.PedidoRegisterDto;
 import com.matheusluizago.backend.dto.PedidoResponseDto;
 import com.matheusluizago.backend.model.Pedido;
@@ -58,6 +60,16 @@ public class PedidoController {
         List<PedidoResponseDto> list = service.searchByExample(id, clienteId, labId, custo, armacao, od, oe, ad, dnp, tratamento, tipoLente);
 
         return ResponseEntity.ok(list);
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<PedidoResponseDto> update(
+            @PathVariable Integer id,
+            @RequestBody PedidoRegisterDto dto
+    ){
+
+        return ResponseEntity.ok(service.update(id, dto));
+
     }
 
 

@@ -1,9 +1,7 @@
 package com.matheusluizago.backend.controller;
 
-import com.matheusluizago.backend.dto.ClienteResponseDto;
 import com.matheusluizago.backend.dto.LaboratorioRegisterDto;
 import com.matheusluizago.backend.dto.LaboratorioResponseDto;
-import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.model.Laboratorio;
 import com.matheusluizago.backend.service.LaboratorioService;
 import org.slf4j.Logger;
@@ -14,8 +12,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 
 @RestController
@@ -57,7 +53,15 @@ public class LaboratorioController {
         return ResponseEntity.ok(list);
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<LaboratorioResponseDto> update(
+            @PathVariable Integer id,
+            @RequestBody LaboratorioRegisterDto dto
+    ){
 
+        return ResponseEntity.ok(service.update(id, dto));
+
+    }
 
 
 }

@@ -1,5 +1,6 @@
 package com.matheusluizago.backend.service;
 
+import com.matheusluizago.backend.dto.LaboratorioRegisterDto;
 import com.matheusluizago.backend.dto.PedidoRegisterDto;
 import com.matheusluizago.backend.dto.PedidoResponseDto;
 import com.matheusluizago.backend.mapper.PedidoMapper;
@@ -12,6 +13,7 @@ import com.matheusluizago.backend.repository.PedidoRepository;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -91,4 +93,21 @@ public class PedidoService {
                 .map(mapper::toDto)
                 .toList();
     }
+
+    @Transactional
+    public PedidoResponseDto update(Integer id, PedidoRegisterDto dto){
+
+        Pedido pedido = repository.findById(id).orElseThrow(() -> new RuntimeException("Pedido não encontrado."));
+        Cliente cliente = pedido.getCliente();
+        Laboratorio laboratorio = pedido.getLaboratorio();
+
+        mapper.updatePedido(pedido, dto, cliente, laboratorio);
+
+        Pedido pedidoAtualizado = repository.save(pedido);
+
+        return mapper.toDto(pedidoAtualizado);
+
+    }
+
+
 }

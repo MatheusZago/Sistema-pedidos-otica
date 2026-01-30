@@ -8,6 +8,7 @@ import com.matheusluizago.backend.repository.ClienteRepository;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,5 +50,19 @@ public class ClienteService {
                 .stream()
                 .map(mapper::toDto)
                 .toList();
+    }
+
+    @Transactional
+    public ClienteResponseDto update(Integer id, ClienteRegisterDto dto){
+
+        Cliente cliente = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Clientenão encontrado"));
+
+        mapper.updateCliente(cliente, dto);
+
+        Cliente atualizado = repository.save(cliente);
+
+        return mapper.toDto(atualizado);
+
     }
 }

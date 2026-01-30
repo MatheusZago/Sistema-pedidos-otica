@@ -58,5 +58,15 @@ public class ClienteController {
         return ResponseEntity.ok(result);
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<ClienteResponseDto> update(
+            @PathVariable Integer id,
+            @RequestBody ClienteRegisterDto dto
+    ){
+
+        return ResponseEntity.ok(service.update(id, dto));
+
+    }
+
 
 }

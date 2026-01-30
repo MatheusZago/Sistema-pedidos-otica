@@ -24,4 +24,14 @@ public class LaboratorioMapper {
                 lab.getNome(),
                 lab.getEndereco());
     }
+
+    public void updateLab(Laboratorio lab, LaboratorioRegisterDto dto){
+        if(dto.nome() != null){
+            lab.setNome(dto.nome());
+        }
+        if(dto.endereco() != null) {
+            lab.setEndereco(dto.endereco());
+        }
+
+    }
 }

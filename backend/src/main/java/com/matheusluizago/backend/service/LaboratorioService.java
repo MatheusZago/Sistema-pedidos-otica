@@ -1,13 +1,17 @@
 package com.matheusluizago.backend.service;
 
+import com.matheusluizago.backend.dto.ClienteRegisterDto;
+import com.matheusluizago.backend.dto.ClienteResponseDto;
 import com.matheusluizago.backend.dto.LaboratorioRegisterDto;
 import com.matheusluizago.backend.dto.LaboratorioResponseDto;
 import com.matheusluizago.backend.mapper.LaboratorioMapper;
+import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.model.Laboratorio;
 import com.matheusluizago.backend.repository.LaboratorioRepository;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,6 +52,19 @@ public class LaboratorioService {
                 .stream()
                 .map(mapper::toDto)
                 .toList();
+    }
+
+    @Transactional
+    public LaboratorioResponseDto update(Integer id, LaboratorioRegisterDto dto){
+
+        Laboratorio laboratorio = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Clientenão encontrado"));
+
+        mapper.updateLab(laboratorio, dto);
+
+        Laboratorio atualizado = repository.save(laboratorio);
+
+        return mapper.toDto(atualizado);
 
     }
 }
