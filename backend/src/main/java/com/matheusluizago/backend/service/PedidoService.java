@@ -10,8 +10,10 @@ import com.matheusluizago.backend.model.Pedido;
 import com.matheusluizago.backend.repository.ClienteRepository;
 import com.matheusluizago.backend.repository.LaboratorioRepository;
 import com.matheusluizago.backend.repository.PedidoRepository;
+import com.matheusluizago.backend.repository.specs.PedidosSpecs;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,45 +52,32 @@ public class PedidoService {
         return repository.save(pedidoSalvo);
     }
 
-    public List<PedidoResponseDto> searchByExample(Integer id, Integer clienteId, Integer labId, BigDecimal custo,
-                                                   String armacao, BigDecimal od, BigDecimal oe, BigDecimal ad,
-                                                   BigDecimal dnp, String tratamento, String tipoLente) {
+    public List<PedidoResponseDto> search(Integer id, Integer clienteId, String clienteNome,
+                                          String clienteEmail, String clienteTelefone,
+                                          Integer labId, String labNome, String labEndereco,
+                                          BigDecimal custo, String armacao,
+                                          BigDecimal od, BigDecimal oe, BigDecimal ad,
+                                          BigDecimal dnp, String tratamento, String tipoLente){
 
-        Cliente cliente = null;
-        if (clienteId != null) {
-            cliente = clienteRepository.findById(clienteId)
-                    .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
-        }
+        Specification<Pedido> spec = Specification
+                .where(PedidosSpecs.idEqual(id))
+                .and(PedidosSpecs.idClienteEqual(clienteId))
+                .and(PedidosSpecs.nomeClienteLike(clienteNome))
+                .and(PedidosSpecs.emailClienteLike(clienteEmail))
+                .and(PedidosSpecs.telefoneClienteLike(clienteTelefone))
+                .and(PedidosSpecs.idLaboratorioEqual(labId))
+                .and(PedidosSpecs.nomeLaboratorioLike(labNome))
+                .and(PedidosSpecs.enderecoLaboratorioLike(labEndereco))
+                .and(PedidosSpecs.custoEqual(custo))
+                .and(PedidosSpecs.armacaoLike(armacao))
+                .and(PedidosSpecs.odEqual(od))
+                .and(PedidosSpecs.oeEqual(oe))
+                .and(PedidosSpecs.adEqual(ad))
+                .and(PedidosSpecs.dnpEqual(dnp))
+                .and(PedidosSpecs.tratamentoLike(tratamento))
+                .and(PedidosSpecs.tipoLenteLike(tipoLente));
 
-        Laboratorio lab = null;
-        if (labId != null) {
-            lab = labRepository.findById(labId)
-                    .orElseThrow(() -> new RuntimeException("Laboratório não encontrado"));
-        }
-
-
-        var pedido = new Pedido();
-        pedido.setId(id);
-        pedido.setCliente(cliente);
-        pedido.setLaboratorio(lab);
-        pedido.setCliente(cliente);
-        pedido.setArmacao(armacao);
-        pedido.setOd(od);
-        pedido.setOe(oe);
-        pedido.setAd(ad);
-        pedido.setDnp(dnp);
-        pedido.setTratamento(tratamento);
-        pedido.setTipoLente(tipoLente);
-
-        ExampleMatcher matcher = ExampleMatcher
-                .matching()
-                .withIgnoreNullValues()
-                .withIgnoreCase()
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-
-        Example<Pedido> pedidoExample = Example.of(pedido, matcher);
-
-        return repository.findAll(pedidoExample)
+        return repository.findAll(spec)
                 .stream()
                 .map(mapper::toDto)
                 .toList();

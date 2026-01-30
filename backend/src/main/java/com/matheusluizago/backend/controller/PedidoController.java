@@ -46,7 +46,12 @@ public class PedidoController {
     public ResponseEntity<List<PedidoResponseDto>> searchByExample(
             @RequestParam(value = "id", required = false) Integer id,
             @RequestParam(value = "clienteId", required = false) Integer clienteId,
+            @RequestParam(value = "clienteNome", required = false) String clienteNome,
+            @RequestParam(value = "clienteEmail", required = false) String clienteEmail,
+            @RequestParam(value = "clienteTelefone", required = false) String clienteTelefone,
             @RequestParam(value = "laboratorioId", required = false) Integer labId,
+            @RequestParam(value = "laboratorioNome", required = false) String labNome,
+            @RequestParam(value = "laboratorioEndereco", required = false) String labEndereco,
             @RequestParam(value = "custo", required = false) BigDecimal custo,
             @RequestParam(value = "armacao", required = false) String armacao,
             @RequestParam(value = "od", required = false) BigDecimal od,
@@ -57,7 +62,10 @@ public class PedidoController {
             @RequestParam(value = "tipoLente", required = false) String tipoLente
 
     ) {
-        List<PedidoResponseDto> list = service.searchByExample(id, clienteId, labId, custo, armacao, od, oe, ad, dnp, tratamento, tipoLente);
+        List<PedidoResponseDto> list = service.search(id, clienteId, clienteNome, clienteEmail, clienteTelefone,
+                labId, labNome, labEndereco,
+                custo, armacao, od, oe, ad, dnp,
+                tratamento, tipoLente);
 
         return ResponseEntity.ok(list);
     }

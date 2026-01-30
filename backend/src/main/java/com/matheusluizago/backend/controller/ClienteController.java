@@ -13,8 +13,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 
 @RestController
@@ -45,6 +43,7 @@ public class ClienteController {
         return ResponseEntity.created(location).body(saved);
     }
 
+    //TODO fazer dar erro qnd nn achar.
     @GetMapping
     public ResponseEntity<List<ClienteResponseDto>> search(
             @RequestParam(value = "id", required = false) Integer id,
@@ -53,7 +52,7 @@ public class ClienteController {
             @RequestParam(value = "email", required = false) String email
     ){
 
-        List<ClienteResponseDto> result = service.searchByExample(id, nome, telefone, email);
+        List<ClienteResponseDto> result = service.search(id, nome, telefone, email);
 
         return ResponseEntity.ok(result);
     }

@@ -48,7 +48,7 @@ public class LaboratorioController {
             @RequestParam(value = "endereco", required = false) String endereco
     ){
 
-        List<LaboratorioResponseDto> list = service.searchByExample(id, nome, endereco);
+        List<LaboratorioResponseDto> list = service.search(id, nome, endereco);
 
         return ResponseEntity.ok(list);
     }
