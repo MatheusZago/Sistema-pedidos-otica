@@ -2,9 +2,11 @@ package com.matheusluizago.backend.controller;
 
 import com.matheusluizago.backend.dto.clienteDto.ClienteRegisterDto;
 import com.matheusluizago.backend.dto.clienteDto.ClienteResponseDto;
+import com.matheusluizago.backend.dto.clienteDto.ClienteUpdateDto;
 import com.matheusluizago.backend.mapper.ClienteMapper;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.service.ClienteService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +31,7 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> save(@RequestBody ClienteRegisterDto clienteDto){
+    public ResponseEntity<Cliente> save(@RequestBody @Valid ClienteRegisterDto clienteDto){
         log.info("Registrando novo cliente: {}", clienteDto.nome());
 
         Cliente saved = service.save(clienteDto);
@@ -60,7 +62,7 @@ public class ClienteController {
     @PutMapping("{id}")
     public ResponseEntity<ClienteResponseDto> update(
             @PathVariable Integer id,
-            @RequestBody ClienteRegisterDto dto
+            @RequestBody ClienteUpdateDto dto
     ){
 
         return ResponseEntity.ok(service.update(id, dto));

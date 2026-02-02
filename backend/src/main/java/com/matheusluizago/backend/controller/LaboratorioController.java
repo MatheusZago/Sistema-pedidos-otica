@@ -45,10 +45,11 @@ public class LaboratorioController {
     public ResponseEntity<List<LaboratorioResponseDto>> searchByExample(
             @RequestParam(value = "id", required = false) Integer id,
             @RequestParam(value = "nome", required = false) String nome,
-            @RequestParam(value = "endereco", required = false) String endereco
+            @RequestParam(value = "endereco", required = false) String endereco,
+            @RequestParam(value = "cnpj", required = false) String cnpj
     ){
 
-        List<LaboratorioResponseDto> list = service.search(id, nome, endereco);
+        List<LaboratorioResponseDto> list = service.search(id, nome, endereco, cnpj);
 
         return ResponseEntity.ok(list);
     }

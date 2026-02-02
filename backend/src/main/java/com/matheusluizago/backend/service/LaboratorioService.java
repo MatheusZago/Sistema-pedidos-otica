@@ -30,35 +30,17 @@ public class LaboratorioService {
         return repository.save(lab);
     }
 
-//    public List<LaboratorioResponseDto> searchByExample(Integer id, String nome, String endereco) {
-//        var lab = new Laboratorio();
-//        lab.setId(id);
-//        lab.setNome(nome);
-//        lab.setEndereco(endereco);
-//
-//        ExampleMatcher matcher = ExampleMatcher
-//                .matching()
-//                .withIgnoreNullValues()
-//                .withIgnoreCase()
-//                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-//
-//        Example<Laboratorio> labExample = Example.of(lab, matcher);
-//
-//        return repository.findAll(labExample)
-//                .stream()
-//                .map(mapper::toDto)
-//                .toList();
-//    }
-
     public List<LaboratorioResponseDto> search(
             Integer id,
             String nome,
-            String endereco
+            String endereco,
+            String cnpj
     ){
         Specification<Laboratorio> spec = Specification
                 .where(LaboratorioSpecs.idEqual(id))
                 .and(LaboratorioSpecs.nomeLike(nome))
-                .and(LaboratorioSpecs.enderecoLike(endereco));
+                .and(LaboratorioSpecs.enderecoLike(endereco))
+                .and(LaboratorioSpecs.cnpjLike(cnpj));
 
         return repository.findAll(spec)
                 .stream()

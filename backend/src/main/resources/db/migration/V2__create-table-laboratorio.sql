@@ -6,6 +6,7 @@ CREATE TABLE laboratorios (
     id INTEGER PRIMARY KEY NOT NULL DEFAULT nextval('laboratorios_id_seq'),
     nome VARCHAR(120) NOT NULL,
     endereco VARCHAR (150) NOT NULL,
+    cnpj VARCHAR (14) NOT NULL UNIQUE,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP
 );

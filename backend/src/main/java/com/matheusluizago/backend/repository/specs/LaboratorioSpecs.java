@@ -13,20 +13,29 @@ public class LaboratorioSpecs {
     }
 
     public static Specification<Laboratorio> nomeLike(String nome){
-        return ((root, query, criteriaBuilder) ->
+        return (root, query, criteriaBuilder) ->
                 nome == null ? null:
                         criteriaBuilder.like(
                                 criteriaBuilder.lower(root.get("nome")),
                                 "%" + nome.toLowerCase() + "%"
-                        ));
+                        );
     }
 
     public static Specification<Laboratorio> enderecoLike(String endereco){
-        return ((root, query, criteriaBuilder) ->
+        return (root, query, criteriaBuilder) ->
                 endereco == null ? null:
                         criteriaBuilder.like(
                                 criteriaBuilder.lower(root.get("endereco")),
                                 "%" + endereco.toLowerCase() + "%"
-                        ));
+                        );
+    }
+
+    public static Specification<Laboratorio> cnpjLike(String cnpj){
+        return (root, query, criteriaBuilder) ->
+                cnpj == null ? null:
+                        criteriaBuilder.like(
+                                criteriaBuilder.lower(root.get("cnpj")),
+                                "%" + cnpj.toLowerCase() + "%"
+                        );
     }
 }

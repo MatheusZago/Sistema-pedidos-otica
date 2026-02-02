@@ -2,6 +2,7 @@ package com.matheusluizago.backend.service;
 
 import com.matheusluizago.backend.dto.clienteDto.ClienteRegisterDto;
 import com.matheusluizago.backend.dto.clienteDto.ClienteResponseDto;
+import com.matheusluizago.backend.dto.clienteDto.ClienteUpdateDto;
 import com.matheusluizago.backend.mapper.ClienteMapper;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.repository.ClienteRepository;
@@ -29,28 +30,6 @@ public class ClienteService {
         return repository.save(cliente);
     }
 
-//    public List<ClienteResponseDto> searchByExample(Integer id, String nome, String telefone, String email) {
-//        var cliente = new Cliente();
-//        cliente.setId(id);
-//        cliente.setNome(nome);
-//        cliente.setTelefone(telefone);
-//        cliente.setEmail(email);
-//
-//        ExampleMatcher matcher = ExampleMatcher
-//                .matching()
-//                .withIgnoreNullValues()
-//                .withIgnoreCase()
-//                .withIgnorePaths("foto")
-//                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING); //Nn precisa ser o falor exato, se tiver lá
-//
-//        Example<Cliente> clienteExample = Example.of(cliente, matcher);
-//
-//        return repository.findAll(clienteExample)
-//                .stream()
-//                .map(mapper::toDto)
-//                .toList();
-//    }
-
     public List<ClienteResponseDto> search(
             Integer id,
             String nome,
@@ -71,10 +50,10 @@ public class ClienteService {
 
 
     @Transactional
-    public ClienteResponseDto update(Integer id, ClienteRegisterDto dto){
+    public ClienteResponseDto update(Integer id, ClienteUpdateDto dto){
 
         Cliente cliente = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Clientenão encontrado"));
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
 
         mapper.updateCliente(cliente, dto);
 

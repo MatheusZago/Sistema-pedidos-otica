@@ -2,6 +2,7 @@ package com.matheusluizago.backend.mapper;
 
 import com.matheusluizago.backend.dto.clienteDto.ClienteRegisterDto;
 import com.matheusluizago.backend.dto.clienteDto.ClienteResponseDto;
+import com.matheusluizago.backend.dto.clienteDto.ClienteUpdateDto;
 import com.matheusluizago.backend.model.Cliente;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +29,7 @@ public class ClienteMapper {
                 cliente.getFoto());
     }
 
-    public void updateCliente(Cliente cliente, ClienteRegisterDto dto){
+    public void updateCliente(Cliente cliente, ClienteUpdateDto dto){
 
         if(dto.nome() != null) {
             cliente.setNome(dto.nome());

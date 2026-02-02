@@ -89,7 +89,6 @@
 			<artifactId>spring-boot-starter-flyway</artifactId>
 		</dependency>
 
-
 	</dependencies>
 
 	<build>

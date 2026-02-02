@@ -28,6 +28,9 @@ public class Laboratorio {
     @Column(name = "endereco", length = 150, nullable = false)
     private String endereco;
 
+    @Column(name = "cnpj", length = 150, nullable = false)
+    private String cnpj;
+
     @CreatedDate
     @Column(name = "created_at", nullable = false)
     private LocalDateTime dateRegister;
@@ -58,6 +61,14 @@ public class Laboratorio {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     public LocalDateTime getDateRegister() {

@@ -13,6 +13,7 @@ public class LaboratorioMapper {
 
         lab.setNome(dto.nome());
         lab.setEndereco(dto.endereco());
+        lab.setCnpj(dto.cnpj());
 
         return lab;
     }
@@ -22,7 +23,8 @@ public class LaboratorioMapper {
         return new LaboratorioResponseDto(
                 lab.getId(),
                 lab.getNome(),
-                lab.getEndereco());
+                lab.getEndereco(),
+                lab.getCnpj());
     }
 
     public void updateLab(Laboratorio lab, LaboratorioRegisterDto dto){
