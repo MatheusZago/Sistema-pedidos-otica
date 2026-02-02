@@ -7,6 +7,7 @@ import com.matheusluizago.backend.mapper.ClienteMapper;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.repository.ClienteRepository;
 import com.matheusluizago.backend.repository.specs.ClienteSpecs;
+import com.matheusluizago.backend.validator.ClienteValidator;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,15 +19,19 @@ public class ClienteService {
 
     private final ClienteRepository repository;
     private final ClienteMapper mapper;
+    private final ClienteValidator validator;
 
-    public ClienteService(ClienteRepository repository, ClienteMapper mapper){
+    public ClienteService(ClienteRepository repository, ClienteMapper mapper, ClienteValidator validator){
         this.mapper = mapper;
         this.repository = repository;
+        this.validator = validator;
     }
 
     public Cliente save(ClienteRegisterDto clienteDto) {
 
         Cliente cliente = mapper.toEntity(clienteDto);
+
+        validator.validate(cliente);
         return repository.save(cliente);
     }
 
@@ -54,6 +59,8 @@ public class ClienteService {
 
         Cliente cliente = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+
+        validator.validate(cliente);
 
         mapper.updateCliente(cliente, dto);
 
