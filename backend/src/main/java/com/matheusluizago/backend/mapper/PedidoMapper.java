@@ -1,7 +1,7 @@
 package com.matheusluizago.backend.mapper;
 
-import com.matheusluizago.backend.dto.PedidoRegisterDto;
-import com.matheusluizago.backend.dto.PedidoResponseDto;
+import com.matheusluizago.backend.dto.pedidoDto.PedidoRegisterDto;
+import com.matheusluizago.backend.dto.pedidoDto.PedidoResponseDto;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.model.Laboratorio;
 import com.matheusluizago.backend.model.Pedido;

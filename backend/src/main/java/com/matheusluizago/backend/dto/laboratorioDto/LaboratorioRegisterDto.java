@@ -1,4 +1,4 @@
-package com.matheusluizago.backend.dto;
+package com.matheusluizago.backend.dto.laboratorioDto;
 
 public record LaboratorioRegisterDto(
         String nome,

@@ -1,8 +1,7 @@
 package com.matheusluizago.backend.service;
 
-import com.matheusluizago.backend.dto.LaboratorioRegisterDto;
-import com.matheusluizago.backend.dto.PedidoRegisterDto;
-import com.matheusluizago.backend.dto.PedidoResponseDto;
+import com.matheusluizago.backend.dto.pedidoDto.PedidoRegisterDto;
+import com.matheusluizago.backend.dto.pedidoDto.PedidoResponseDto;
 import com.matheusluizago.backend.mapper.PedidoMapper;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.model.Laboratorio;
@@ -11,15 +10,12 @@ import com.matheusluizago.backend.repository.ClienteRepository;
 import com.matheusluizago.backend.repository.LaboratorioRepository;
 import com.matheusluizago.backend.repository.PedidoRepository;
 import com.matheusluizago.backend.repository.specs.PedidosSpecs;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PedidoService {

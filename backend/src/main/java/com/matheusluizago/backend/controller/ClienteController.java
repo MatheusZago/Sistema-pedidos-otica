@@ -1,7 +1,7 @@
 package com.matheusluizago.backend.controller;
 
-import com.matheusluizago.backend.dto.ClienteRegisterDto;
-import com.matheusluizago.backend.dto.ClienteResponseDto;
+import com.matheusluizago.backend.dto.clienteDto.ClienteRegisterDto;
+import com.matheusluizago.backend.dto.clienteDto.ClienteResponseDto;
 import com.matheusluizago.backend.mapper.ClienteMapper;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.service.ClienteService;

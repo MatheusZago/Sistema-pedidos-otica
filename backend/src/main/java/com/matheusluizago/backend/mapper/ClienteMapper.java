@@ -1,7 +1,7 @@
 package com.matheusluizago.backend.mapper;
 
-import com.matheusluizago.backend.dto.ClienteRegisterDto;
-import com.matheusluizago.backend.dto.ClienteResponseDto;
+import com.matheusluizago.backend.dto.clienteDto.ClienteRegisterDto;
+import com.matheusluizago.backend.dto.clienteDto.ClienteResponseDto;
 import com.matheusluizago.backend.model.Cliente;
 import org.springframework.stereotype.Component;
 

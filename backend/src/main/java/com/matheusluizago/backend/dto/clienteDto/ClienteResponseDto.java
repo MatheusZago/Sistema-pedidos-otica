@@ -1,4 +1,4 @@
-package com.matheusluizago.backend.dto;
+package com.matheusluizago.backend.dto.clienteDto;
 
 public record ClienteResponseDto (
         Integer id,

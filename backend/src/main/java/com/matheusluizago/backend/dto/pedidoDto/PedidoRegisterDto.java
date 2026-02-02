@@ -1,4 +1,4 @@
-package com.matheusluizago.backend.dto;
+package com.matheusluizago.backend.dto.pedidoDto;
 
 import java.math.BigDecimal;
 

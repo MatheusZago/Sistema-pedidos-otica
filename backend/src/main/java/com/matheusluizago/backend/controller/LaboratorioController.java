@@ -1,7 +1,7 @@
 package com.matheusluizago.backend.controller;
 
-import com.matheusluizago.backend.dto.LaboratorioRegisterDto;
-import com.matheusluizago.backend.dto.LaboratorioResponseDto;
+import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioRegisterDto;
+import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioResponseDto;
 import com.matheusluizago.backend.model.Laboratorio;
 import com.matheusluizago.backend.service.LaboratorioService;
 import org.slf4j.Logger;

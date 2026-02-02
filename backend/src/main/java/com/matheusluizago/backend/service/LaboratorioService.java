@@ -1,7 +1,7 @@
 package com.matheusluizago.backend.service;
 
-import com.matheusluizago.backend.dto.LaboratorioRegisterDto;
-import com.matheusluizago.backend.dto.LaboratorioResponseDto;
+import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioRegisterDto;
+import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioResponseDto;
 import com.matheusluizago.backend.mapper.LaboratorioMapper;
 import com.matheusluizago.backend.model.Laboratorio;
 import com.matheusluizago.backend.repository.LaboratorioRepository;

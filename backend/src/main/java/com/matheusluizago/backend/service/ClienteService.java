@@ -1,19 +1,16 @@
 package com.matheusluizago.backend.service;
 
-import com.matheusluizago.backend.dto.ClienteRegisterDto;
-import com.matheusluizago.backend.dto.ClienteResponseDto;
+import com.matheusluizago.backend.dto.clienteDto.ClienteRegisterDto;
+import com.matheusluizago.backend.dto.clienteDto.ClienteResponseDto;
 import com.matheusluizago.backend.mapper.ClienteMapper;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.repository.ClienteRepository;
 import com.matheusluizago.backend.repository.specs.ClienteSpecs;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ClienteService {
