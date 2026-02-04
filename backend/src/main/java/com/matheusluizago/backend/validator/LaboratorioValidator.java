@@ -1,5 +1,6 @@
 package com.matheusluizago.backend.validator;
 
+import com.matheusluizago.backend.exceptions.DuplicateRegisterException;
 import com.matheusluizago.backend.model.Laboratorio;
 import com.matheusluizago.backend.repository.LaboratorioRepository;
 import org.springframework.stereotype.Component;
@@ -19,7 +20,7 @@ public class LaboratorioValidator {
     public void validate(Laboratorio laboratorio){
         if (existsRegisteredLaboratorio(laboratorio)) {
 
-            throw new RuntimeException("Laboratorio já registrado!");
+            throw new DuplicateRegisterException("Laboratorio já registrado!");
         }
     }
 

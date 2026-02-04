@@ -2,6 +2,7 @@ package com.matheusluizago.backend.service;
 
 import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioRegisterDto;
 import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioResponseDto;
+import com.matheusluizago.backend.exceptions.ResourceNotFoundException;
 import com.matheusluizago.backend.mapper.LaboratorioMapper;
 import com.matheusluizago.backend.model.Laboratorio;
 import com.matheusluizago.backend.repository.LaboratorioRepository;
@@ -56,7 +57,7 @@ public class LaboratorioService {
     public LaboratorioResponseDto update(Integer id, LaboratorioRegisterDto dto){
 
         Laboratorio laboratorio = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Laboratório não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Laboratório não encontrado"));
 
         validator.validate(laboratorio);
 

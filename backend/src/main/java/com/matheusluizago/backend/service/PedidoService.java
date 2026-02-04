@@ -2,6 +2,7 @@ package com.matheusluizago.backend.service;
 
 import com.matheusluizago.backend.dto.pedidoDto.PedidoRegisterDto;
 import com.matheusluizago.backend.dto.pedidoDto.PedidoResponseDto;
+import com.matheusluizago.backend.exceptions.ResourceNotFoundException;
 import com.matheusluizago.backend.mapper.PedidoMapper;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.model.Laboratorio;
@@ -82,7 +83,8 @@ public class PedidoService {
     @Transactional
     public PedidoResponseDto update(Integer id, PedidoRegisterDto dto){
 
-        Pedido pedido = repository.findById(id).orElseThrow(() -> new RuntimeException("Pedido não encontrado."));
+        Pedido pedido = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado."));
         Cliente cliente = pedido.getCliente();
         Laboratorio laboratorio = pedido.getLaboratorio();
 

@@ -1,5 +1,6 @@
 package com.matheusluizago.backend.validator;
 
+import com.matheusluizago.backend.exceptions.DuplicateRegisterException;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.repository.ClienteRepository;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,7 @@ public class ClienteValidator {
     public void validate(Cliente cliente){
         if (existsRegisteredCliente(cliente)) {
 
-            throw new RuntimeException("Cliente já registrado!");
+            throw new DuplicateRegisterException("Cliente já registrado");
         }
     }
 
