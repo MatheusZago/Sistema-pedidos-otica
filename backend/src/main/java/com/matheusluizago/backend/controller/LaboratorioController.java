@@ -2,6 +2,7 @@ package com.matheusluizago.backend.controller;
 
 import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioRegisterDto;
 import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioResponseDto;
+import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioUpdateDto;
 import com.matheusluizago.backend.model.Laboratorio;
 import com.matheusluizago.backend.service.LaboratorioService;
 import org.slf4j.Logger;
@@ -57,7 +58,7 @@ public class LaboratorioController {
     @PutMapping("{id}")
     public ResponseEntity<LaboratorioResponseDto> update(
             @PathVariable Integer id,
-            @RequestBody LaboratorioRegisterDto dto
+            @RequestBody LaboratorioUpdateDto dto
     ){
 
         return ResponseEntity.ok(service.update(id, dto));

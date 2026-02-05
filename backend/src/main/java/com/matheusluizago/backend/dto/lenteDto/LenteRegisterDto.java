@@ -1,5 +1,6 @@
 package com.matheusluizago.backend.dto.lenteDto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -9,6 +10,7 @@ import java.math.BigDecimal;
 public record LenteRegisterDto(
         @NotNull(message = "Tipo da lente é obrigatório.")
         @Size(min = 3, max = 100, message = "Tipo de lente invalido.")
+        @JsonProperty("tipo_lente")
         String tipoLente,
 
         @NotNull(message = "Custo é obrigatório.")
@@ -25,6 +27,7 @@ public record LenteRegisterDto(
 
         @NotNull(message = "Valor da venda é obrigatório.")
         @Digits(integer = 1000, fraction = 2, message = "Formato do valor da venda inválido")
+        @JsonProperty("valor_venda")
         BigDecimal valorVenda
 
 ) {

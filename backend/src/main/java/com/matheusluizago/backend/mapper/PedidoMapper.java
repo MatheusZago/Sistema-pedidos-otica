@@ -2,6 +2,7 @@ package com.matheusluizago.backend.mapper;
 
 import com.matheusluizago.backend.dto.pedidoDto.PedidoRegisterDto;
 import com.matheusluizago.backend.dto.pedidoDto.PedidoResponseDto;
+import com.matheusluizago.backend.dto.pedidoDto.PedidoUpdateDto;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.model.Laboratorio;
 import com.matheusluizago.backend.model.Lente;
@@ -57,7 +58,7 @@ public class PedidoMapper {
         );
     }
 
-    public void updatePedido(Pedido pedido, PedidoRegisterDto dto, Cliente cliente, Laboratorio laboratorio, Lente lente){
+    public void updatePedido(Pedido pedido, PedidoUpdateDto dto, Cliente cliente, Laboratorio laboratorio, Lente lente){
 
         if(dto.clienteId() != null){
             pedido.setCliente(cliente);

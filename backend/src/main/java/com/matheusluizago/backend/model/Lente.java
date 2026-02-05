@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public class Lente {
 
+    @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lente_seq")
     @SequenceGenerator(
             name = "lente_seq",
@@ -25,7 +26,7 @@ public class Lente {
     @Column(name = "tipo_lente", length = 120, nullable = false)
     private String tipoLente;
 
-    @Column(precision = 10, scale = 2, nullable = false)
+    @Column(name = "custo", precision = 10, scale = 2, nullable = false)
     private BigDecimal custo;
 
     @Column(name = "indice", nullable = false, length = 120)
@@ -34,7 +35,7 @@ public class Lente {
     @Column(name = "tratamento", nullable = false, length = 120)
     private String tratamento;
 
-    @Column(precision = 10, scale = 2, nullable = false)
+    @Column(name = "valor_venda", precision = 10, scale = 2, nullable = false)
     private BigDecimal valorVenda;
 
     @CreatedDate

@@ -2,6 +2,7 @@ package com.matheusluizago.backend.controller;
 
 import com.matheusluizago.backend.dto.pedidoDto.PedidoRegisterDto;
 import com.matheusluizago.backend.dto.pedidoDto.PedidoResponseDto;
+import com.matheusluizago.backend.dto.pedidoDto.PedidoUpdateDto;
 import com.matheusluizago.backend.model.Pedido;
 import com.matheusluizago.backend.service.PedidoService;
 import org.slf4j.Logger;
@@ -71,7 +72,7 @@ public class PedidoController {
     @PutMapping("{id}")
     public ResponseEntity<PedidoResponseDto> update(
             @PathVariable Integer id,
-            @RequestBody PedidoRegisterDto dto
+            @RequestBody PedidoUpdateDto dto
     ){
 
         return ResponseEntity.ok(service.update(id, dto));

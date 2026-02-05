@@ -2,6 +2,7 @@ package com.matheusluizago.backend.mapper;
 
 import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioRegisterDto;
 import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioResponseDto;
+import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioUpdateDto;
 import com.matheusluizago.backend.model.Laboratorio;
 import org.springframework.stereotype.Component;
 
@@ -27,12 +28,16 @@ public class LaboratorioMapper {
                 lab.getCnpj());
     }
 
-    public void updateLab(Laboratorio lab, LaboratorioRegisterDto dto){
+    public void updateLab(Laboratorio lab, LaboratorioUpdateDto dto){
         if(dto.nome() != null){
             lab.setNome(dto.nome());
         }
         if(dto.endereco() != null) {
             lab.setEndereco(dto.endereco());
+        }
+
+        if(dto.cnpj() != null){
+            lab.setCnpj(dto.cnpj());
         }
 
     }
