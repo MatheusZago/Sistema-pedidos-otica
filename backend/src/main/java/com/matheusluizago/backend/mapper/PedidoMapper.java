@@ -4,6 +4,7 @@ import com.matheusluizago.backend.dto.pedidoDto.PedidoRegisterDto;
 import com.matheusluizago.backend.dto.pedidoDto.PedidoResponseDto;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.model.Laboratorio;
+import com.matheusluizago.backend.model.Lente;
 import com.matheusluizago.backend.model.Pedido;
 import org.springframework.stereotype.Component;
 
@@ -14,20 +15,20 @@ public class PedidoMapper {
     public Pedido toEntity(
             PedidoRegisterDto dto,
             Cliente cliente,
-            Laboratorio laboratorio
+            Laboratorio laboratorio,
+            Lente lente
     ) {
         Pedido pedido = new Pedido();
 
         pedido.setCliente(cliente);
         pedido.setLaboratorio(laboratorio);
-        pedido.setCusto(dto.custo());
+        pedido.setLente(lente);
         pedido.setArmacao(dto.armacao());
         pedido.setOd(dto.od());
         pedido.setOe(dto.oe());
         pedido.setAd(dto.ad());
         pedido.setDnp(dto.dnp());
-        pedido.setTratamento(dto.tratamento());
-        pedido.setTipoLente(dto.tipoLente());
+
 
         return pedido;
     }
@@ -41,19 +42,22 @@ public class PedidoMapper {
                 pedido.getCliente().getFoto(),
                 pedido.getLaboratorio().getId(),
                 pedido.getLaboratorio().getNome(),
-                pedido.getCusto(),
+                pedido.getLente().getId(),
+                pedido.getLente().getTipoLente(),
+                pedido.getLente().getCusto(),
+                pedido.getLente().getTratamento(),
+                pedido.getLente().getIndice(),
+                pedido.getLente().getValorVenda(),
                 pedido.getArmacao(),
                 pedido.getOd(),
                 pedido.getOe(),
                 pedido.getAd(),
                 pedido.getDnp(),
-                pedido.getTratamento(),
-                pedido.getTipoLente(),
                 pedido.getDateRegister()
         );
     }
 
-    public void updatePedido(Pedido pedido, PedidoRegisterDto dto, Cliente cliente, Laboratorio laboratorio){
+    public void updatePedido(Pedido pedido, PedidoRegisterDto dto, Cliente cliente, Laboratorio laboratorio, Lente lente){
 
         if(dto.clienteId() != null){
             pedido.setCliente(cliente);
@@ -61,8 +65,8 @@ public class PedidoMapper {
         if(dto.laboratorioId() != null){
             pedido.setLaboratorio(laboratorio);
         }
-        if(dto.custo() != null){
-            pedido.setCusto(dto.custo());
+        if(dto.lenteId() != null){
+            pedido.setLente(lente);
         }
         if(dto.armacao() != null){
             pedido.setArmacao(dto.armacao());
@@ -79,12 +83,5 @@ public class PedidoMapper {
         if(dto.dnp() != null){
             pedido.setDnp(dto.dnp());
         }
-        if(dto.tratamento() != null){
-            pedido.setTratamento(dto.tratamento());
-        }
-        if(dto.tipoLente() != null){
-            pedido.setTipoLente(dto.tipoLente());
-        }
-
     }
 }

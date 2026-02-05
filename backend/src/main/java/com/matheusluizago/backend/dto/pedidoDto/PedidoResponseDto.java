@@ -10,14 +10,17 @@ public record PedidoResponseDto(
         String clienteFoto,
         Integer laboratorio,
         String laboratorioNome,
+        Integer lente,
+        String tipoLente,
         BigDecimal custo,
+        String tratamento,
+        String indice,
+        BigDecimal valorVenda,
         String armacao,
         BigDecimal od,
         BigDecimal oe,
         BigDecimal ad,
         BigDecimal dnp,
-        String tratamento,
-        String tipoLente,
         LocalDateTime createdAt
 ) {
 }

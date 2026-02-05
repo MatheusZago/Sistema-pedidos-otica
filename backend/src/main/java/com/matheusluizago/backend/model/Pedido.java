@@ -31,8 +31,9 @@ public class Pedido {
     @JoinColumn(name = "laboratorio_id", nullable = false)
     private Laboratorio laboratorio;
 
-    @Column(precision = 10, scale = 2, nullable = false)
-    private BigDecimal custo;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lente_id", nullable = false)
+    private Lente lente;
 
     @Column(name = "armacao")
     private String armacao;
@@ -55,12 +56,6 @@ public class Pedido {
     //Distãncia Naso Pupilar
     @Column(precision = 5, scale = 2)
     private BigDecimal dnp;
-
-    @Column(length = 120)
-    private String tratamento;
-
-    @Column(name = "tipo_lente", length = 50)
-    private String tipoLente;
 
     @Column(name = "data_entrega")
     private LocalDateTime dataEntrega;
@@ -95,14 +90,6 @@ public class Pedido {
 
     public void setLaboratorio(Laboratorio laboratorio) {
         this.laboratorio = laboratorio;
-    }
-
-    public BigDecimal getCusto() {
-        return custo;
-    }
-
-    public void setCusto(BigDecimal custo) {
-        this.custo = custo;
     }
 
     public String getArmacao() {
@@ -153,28 +140,20 @@ public class Pedido {
         this.dnp = dnp;
     }
 
-    public String getTratamento() {
-        return tratamento;
-    }
-
-    public void setTratamento(String tratamento) {
-        this.tratamento = tratamento;
-    }
-
-    public String getTipoLente() {
-        return tipoLente;
-    }
-
-    public void setTipoLente(String tipoLente) {
-        this.tipoLente = tipoLente;
-    }
-
     public LocalDateTime getDataEntrega() {
         return dataEntrega;
     }
 
     public void setDataEntrega(LocalDateTime dataEntrega) {
         this.dataEntrega = dataEntrega;
+    }
+
+    public Lente getLente() {
+        return lente;
+    }
+
+    public void setLente(Lente lente) {
+        this.lente = lente;
     }
 
     public LocalDateTime getDateRegister() {

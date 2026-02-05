@@ -8,8 +8,7 @@ import java.math.BigDecimal;
 public record PedidoUpdateDto(
         Integer clienteId,
         Integer laboratorioId,
-        @Digits(integer = 4, fraction = 2, message = "Formato de Custo inválido")
-        BigDecimal custo,
+        Integer lenteId,
         @Size(min = 3, max = 100, message = "Armação inválida.")
         String armacao,
         @Digits(integer = 1, fraction = 2, message = "Formato de Od inválido")
@@ -19,10 +18,6 @@ public record PedidoUpdateDto(
         @Digits(integer = 1, fraction = 2, message = "Formato de Ad inválido")
         BigDecimal ad,
         @Digits(integer = 1, fraction = 2, message = "Formato de DNP inválido")
-        BigDecimal dnp,
-        @Size(min = 3, max = 100, message = "Tratamento inválido.")
-        String tratamento,
-        @Size(min = 3, max = 100, message = "Tipo de lente inválido.")
-        String tipoLente
+        BigDecimal dnp
 ) {
 }
