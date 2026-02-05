@@ -60,10 +60,11 @@ public class PedidoService {
 
     public List<PedidoResponseDto> search(Integer id, Integer clienteId, String clienteNome,
                                           String clienteEmail, String clienteTelefone,
-                                          Integer labId, String labNome, String labEndereco,
-                                          BigDecimal custo, String armacao,
-                                          BigDecimal od, BigDecimal oe, BigDecimal ad,
-                                          BigDecimal dnp, String tratamento, String tipoLente){
+                                          Integer labId, String labNome, String labEndereco, String labCnpj,
+                                          Integer lenteId, BigDecimal lenteCusto, String lenteTratamento,
+                                          String lenteIndice, String tipoLente, BigDecimal valorVenda,
+                                          String armacao, BigDecimal od, BigDecimal oe, BigDecimal ad, BigDecimal dnp
+                                            ){
 
         Specification<Pedido> spec = Specification
                 .where(PedidosSpecs.idEqual(id))
@@ -74,14 +75,19 @@ public class PedidoService {
                 .and(PedidosSpecs.idLaboratorioEqual(labId))
                 .and(PedidosSpecs.nomeLaboratorioLike(labNome))
                 .and(PedidosSpecs.enderecoLaboratorioLike(labEndereco))
-                .and(PedidosSpecs.custoEqual(custo))
+                .and(PedidosSpecs.cnpjLaboratorioLike(labCnpj))
+                .and(PedidosSpecs.idLenteEqual(lenteId))
+                .and(PedidosSpecs.custoLenteEqual(lenteCusto))
+                .and(PedidosSpecs.tratamentoLenteLike(lenteTratamento))
+                .and(PedidosSpecs.indiceLenteLike(lenteIndice))
+                .and(PedidosSpecs.tipoLenteLike(tipoLente))
+                .and(PedidosSpecs.valorVendaLenteEqual(valorVenda))
                 .and(PedidosSpecs.armacaoLike(armacao))
                 .and(PedidosSpecs.odEqual(od))
                 .and(PedidosSpecs.oeEqual(oe))
                 .and(PedidosSpecs.adEqual(ad))
-                .and(PedidosSpecs.dnpEqual(dnp))
-                .and(PedidosSpecs.tratamentoLike(tratamento))
-                .and(PedidosSpecs.tipoLenteLike(tipoLente));
+                .and(PedidosSpecs.dnpEqual(dnp));
+
 
         return repository.findAll(spec)
                 .stream()

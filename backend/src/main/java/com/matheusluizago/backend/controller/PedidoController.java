@@ -41,6 +41,7 @@ public class PedidoController {
         return ResponseEntity.created(location).body(saved);
     }
 
+    //TODO fazer ele retornar só algumas informações, sem voltar com datacreate do cliente e etc.
     @GetMapping
     public ResponseEntity<List<PedidoResponseDto>> searchByExample(
             @RequestParam(value = "id", required = false) Integer id,
@@ -51,20 +52,27 @@ public class PedidoController {
             @RequestParam(value = "laboratorioId", required = false) Integer labId,
             @RequestParam(value = "laboratorioNome", required = false) String labNome,
             @RequestParam(value = "laboratorioEndereco", required = false) String labEndereco,
-            @RequestParam(value = "custo", required = false) BigDecimal custo,
+            @RequestParam(value = "laboratorioCnpj", required = false) String labCnpj,
+            @RequestParam(value = "lenteId", required = false) Integer lenteId,
+            @RequestParam(value = "lenteCusto", required = false) BigDecimal lenteCusto,
+            @RequestParam(value = "lenteTratamento", required = false) String lenteTratamento,
+            @RequestParam(value = "lenteIndice", required = false) String lenteIndice,
+            @RequestParam(value = "tipoLente", required = false) String tipoLente,
+            @RequestParam(value = "valorVenda", required = false) BigDecimal valorVenda,
             @RequestParam(value = "armacao", required = false) String armacao,
             @RequestParam(value = "od", required = false) BigDecimal od,
             @RequestParam(value = "oe", required = false) BigDecimal oe,
             @RequestParam(value = "ad", required = false) BigDecimal ad,
-            @RequestParam(value = "dnp", required = false) BigDecimal dnp,
-            @RequestParam(value = "tratamento", required = false) String tratamento,
-            @RequestParam(value = "tipoLente", required = false) String tipoLente
+            @RequestParam(value = "dnp", required = false) BigDecimal dnp
+
 
     ) {
         List<PedidoResponseDto> list = service.search(id, clienteId, clienteNome, clienteEmail, clienteTelefone,
-                labId, labNome, labEndereco,
-                custo, armacao, od, oe, ad, dnp,
-                tratamento, tipoLente);
+                labId, labNome, labEndereco, labCnpj,
+                lenteId, lenteCusto, lenteTratamento,
+                lenteIndice, tipoLente, valorVenda,
+                armacao, od, oe, ad, dnp
+                );
 
         return ResponseEntity.ok(list);
     }
