@@ -65,5 +65,11 @@ public class LaboratorioController {
 
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void>delete(@PathVariable Integer id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 
 }

@@ -70,4 +70,11 @@ public class ClienteService {
         return mapper.toDto(atualizado);
 
     }
+
+    public void delete(Integer id){
+        Cliente cliente = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado."));
+
+        repository.delete(cliente);
+    }
 }

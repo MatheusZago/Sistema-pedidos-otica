@@ -5,6 +5,7 @@ import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioResponseDto;
 import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioUpdateDto;
 import com.matheusluizago.backend.exceptions.ResourceNotFoundException;
 import com.matheusluizago.backend.mapper.LaboratorioMapper;
+import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.model.Laboratorio;
 import com.matheusluizago.backend.repository.LaboratorioRepository;
 import com.matheusluizago.backend.repository.specs.LaboratorioSpecs;
@@ -70,5 +71,12 @@ public class LaboratorioService {
 
         return mapper.toDto(atualizado);
 
+    }
+
+    public void delete(Integer id){
+        Laboratorio laboratorio = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Laboratório não encontrado."));
+
+        repository.delete(laboratorio);
     }
 }

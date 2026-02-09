@@ -63,4 +63,10 @@ public class LenteController {
         return ResponseEntity.ok(service.update(id, dto));
 
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void>delete(@PathVariable Integer id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

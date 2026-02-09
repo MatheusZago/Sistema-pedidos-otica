@@ -113,5 +113,12 @@ public class PedidoService {
 
     }
 
+    public void delete(Integer id){
+        Pedido pedido = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado."));
+
+        repository.delete(pedido);
+    }
+
 
 }

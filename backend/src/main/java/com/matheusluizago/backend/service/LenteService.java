@@ -6,6 +6,7 @@ import com.matheusluizago.backend.dto.lenteDto.LenteResponseDto;
 import com.matheusluizago.backend.dto.lenteDto.LenteUpdateDto;
 import com.matheusluizago.backend.exceptions.ResourceNotFoundException;
 import com.matheusluizago.backend.mapper.LenteMapper;
+import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.model.Laboratorio;
 import com.matheusluizago.backend.model.Lente;
 import com.matheusluizago.backend.repository.LenteRepository;
@@ -84,6 +85,13 @@ public class LenteService {
 
         return mapper.toDto(atualizada);
 
+    }
+
+    public void delete(Integer id){
+        Lente lente = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Lente não encontrado."));
+
+        repository.delete(lente);
     }
 
 }

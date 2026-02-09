@@ -7,6 +7,7 @@ import com.matheusluizago.backend.mapper.ClienteMapper;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.service.ClienteService;
 import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -69,5 +70,10 @@ public class ClienteController {
 
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void>delete(@PathVariable Integer id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }
