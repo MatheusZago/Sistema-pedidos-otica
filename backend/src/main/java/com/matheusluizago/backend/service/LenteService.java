@@ -1,11 +1,12 @@
 package com.matheusluizago.backend.service;
 
 import com.matheusluizago.backend.controller.ClienteController;
-import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioUpdateDto;
 import com.matheusluizago.backend.dto.lenteDto.LenteRegisterDto;
 import com.matheusluizago.backend.dto.lenteDto.LenteResponseDto;
 import com.matheusluizago.backend.dto.lenteDto.LenteUpdateDto;
+import com.matheusluizago.backend.exceptions.ResourceNotFoundException;
 import com.matheusluizago.backend.mapper.LenteMapper;
+import com.matheusluizago.backend.model.Laboratorio;
 import com.matheusluizago.backend.model.Lente;
 import com.matheusluizago.backend.repository.LenteRepository;
 import com.matheusluizago.backend.repository.specs.LenteSpecs;
@@ -21,7 +22,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Service
-@Slf4j
 public class LenteService {
 
     private final LenteRepository repository;
@@ -70,7 +70,20 @@ public class LenteService {
 
     }
 
-    //TODO implementar update e atualizar update de todos
+    @Transactional
+    public LenteResponseDto update(Integer id, LenteUpdateDto dto){
 
+        Lente lente = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Lente não encontrada"));
+
+        validator.validate(lente);
+
+        mapper.updateLente(lente, dto);
+
+        Lente atualizada = repository.save(lente);
+
+        return mapper.toDto(atualizada);
+
+    }
 
 }

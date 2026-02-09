@@ -1,7 +1,10 @@
 package com.matheusluizago.backend.controller;
 
+import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioResponseDto;
+import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioUpdateDto;
 import com.matheusluizago.backend.dto.lenteDto.LenteRegisterDto;
 import com.matheusluizago.backend.dto.lenteDto.LenteResponseDto;
+import com.matheusluizago.backend.dto.lenteDto.LenteUpdateDto;
 import com.matheusluizago.backend.model.Lente;
 import com.matheusluizago.backend.service.LenteService;
 import jakarta.validation.Valid;
@@ -49,5 +52,15 @@ public class LenteController {
         List<LenteResponseDto> list = service.search(id, tipoLente, custo, tratamento, indice, valorVenda);
 
         return ResponseEntity.ok(list);
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<LenteResponseDto> update(
+            @PathVariable Integer id,
+            @RequestBody LenteUpdateDto dto
+    ){
+
+        return ResponseEntity.ok(service.update(id, dto));
+
     }
 }
