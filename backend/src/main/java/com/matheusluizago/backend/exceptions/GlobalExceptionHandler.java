@@ -1,7 +1,6 @@
 package com.matheusluizago.backend.exceptions;
 
 import com.matheusluizago.backend.dto.errorDto.ErrorResponseDto;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
