@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponseDto> handleReourceNotFoundException(ResourceNotFoundException ex){
 
         ErrorResponseDto error = new ErrorResponseDto(
-                HttpStatus.CONFLICT.value(),
+                HttpStatus.NOT_FOUND.value(),
                 "Recurso não encontrado.",
                 ex.getMessage()
         );
@@ -39,7 +39,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponseDto> handleArgumentNotValidException(MethodArgumentNotValidException ex){
 
         ErrorResponseDto error = new ErrorResponseDto(
-                HttpStatus.CONFLICT.value(),
+                HttpStatus.BAD_REQUEST.value(),
                 "Argumento não valido.",
                 ex.getMessage()
         );
@@ -51,7 +51,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponseDto> handleMessageNotReadableException(HttpMessageNotReadableException ex){
 
         ErrorResponseDto error = new ErrorResponseDto(
-                HttpStatus.CONFLICT.value(),
+                HttpStatus.BAD_REQUEST.value(),
                 "Mensagem não legível.",
                 ex.getMessage()
         );

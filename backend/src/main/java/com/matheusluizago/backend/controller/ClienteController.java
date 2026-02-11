@@ -3,13 +3,15 @@ package com.matheusluizago.backend.controller;
 import com.matheusluizago.backend.dto.clienteDto.ClienteRegisterDto;
 import com.matheusluizago.backend.dto.clienteDto.ClienteResponseDto;
 import com.matheusluizago.backend.dto.clienteDto.ClienteUpdateDto;
-import com.matheusluizago.backend.mapper.ClienteMapper;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.service.ClienteService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -17,23 +19,32 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-
+@Tag(name = "Clientes", description = "Endpoint para gerenciamento de clientes.")
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
 
     private final ClienteService service;
-    private final ClienteMapper mapper;
-    private final Logger log = LoggerFactory.getLogger(ClienteController.class);
 
-    public ClienteController(ClienteService service, ClienteMapper mapper){
+    public ClienteController(ClienteService service){
         this.service = service;
-        this.mapper = mapper;
     }
 
+    @Operation(
+            summary = "Cadastrar novo cliente.",
+            description = "Salva um novo cliente no banco de dados e retorna o recurso criado. "
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "Cliente criado com sucesso!",
+                    content = @Content(
+                            schema = @Schema(implementation = Cliente.class)
+                    )
+            )
+    })
     @PostMapping
     public ResponseEntity<Cliente> save(@RequestBody @Valid ClienteRegisterDto clienteDto){
-        log.info("Registrando novo cliente: {}", clienteDto.nome());
 
         Cliente saved = service.save(clienteDto);
 
@@ -46,7 +57,6 @@ public class ClienteController {
         return ResponseEntity.created(location).body(saved);
     }
 
-    //TODO fazer dar erro qnd nn achar.
     @GetMapping
     public ResponseEntity<List<ClienteResponseDto>> search(
             @RequestParam(value = "id", required = false) Integer id,
