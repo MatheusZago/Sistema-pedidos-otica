@@ -3,6 +3,7 @@ package com.matheusluizago.backend.controller;
 import com.matheusluizago.backend.dto.clienteDto.ClienteRegisterDto;
 import com.matheusluizago.backend.dto.clienteDto.ClienteResponseDto;
 import com.matheusluizago.backend.dto.clienteDto.ClienteUpdateDto;
+import com.matheusluizago.backend.dto.errorDto.ErrorResponseDto;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.service.ClienteService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -39,9 +40,17 @@ public class ClienteController {
                     responseCode = "201",
                     description = "Cliente criado com sucesso!",
                     content = @Content(
-                            schema = @Schema(implementation = Cliente.class)
-                    )
-            )
+                            schema = @Schema(implementation = Cliente.class))),
+            @ApiResponse(
+                    responseCode = "409",
+                    description = "Cliente já existente.",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class))),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Campos inválidos. ",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class))),
     })
     @PostMapping
     public ResponseEntity<Cliente> save(@RequestBody @Valid ClienteRegisterDto clienteDto){
@@ -57,6 +66,17 @@ public class ClienteController {
         return ResponseEntity.created(location).body(saved);
     }
 
+    @Operation(
+            summary = "Buscar clientes.",
+            description = "Busca uma lista de todos os clientes de acordo com parametros. "
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Lista retornada com sucesso!",
+                    content = @Content(
+                            schema = @Schema(implementation = ClienteResponseDto.class))),
+    })
     @GetMapping
     public ResponseEntity<List<ClienteResponseDto>> search(
             @RequestParam(value = "id", required = false) Integer id,
@@ -70,6 +90,27 @@ public class ClienteController {
         return ResponseEntity.ok(result);
     }
 
+    @Operation(
+            summary = "Atualizar cliente.",
+            description = "Atualiza um cliente já existente no banco de dados. "
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Cliente atualizado com sucesso!",
+                    content = @Content(
+                            schema = @Schema(implementation = ClienteResponseDto.class))),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Cliente não encontrado.",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class))),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Campos inválidos. ",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class))),
+    })
     @PutMapping("{id}")
     public ResponseEntity<ClienteResponseDto> update(
             @PathVariable Integer id,
@@ -80,6 +121,25 @@ public class ClienteController {
 
     }
 
+    @Operation(
+            summary = "Deletar cliente.",
+            description = "Deletar um cliente já existente no banco de dados. "
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "Cliente deletado com sucesso!"),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Cliente não encontrado.",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class))),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Campos inválidos. ",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class))),
+    })
     @DeleteMapping("{id}")
     public ResponseEntity<Void>delete(@PathVariable Integer id){
         service.delete(id);
