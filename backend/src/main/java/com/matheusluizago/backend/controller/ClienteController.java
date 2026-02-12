@@ -53,14 +53,14 @@ public class ClienteController {
                             schema = @Schema(implementation = ErrorResponseDto.class))),
     })
     @PostMapping
-    public ResponseEntity<Cliente> save(@RequestBody @Valid ClienteRegisterDto clienteDto){
+    public ResponseEntity<ClienteResponseDto> save(@RequestBody @Valid ClienteRegisterDto clienteDto){
 
-        Cliente saved = service.save(clienteDto);
+        ClienteResponseDto saved = service.save(clienteDto);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(saved.getId())
+                .buildAndExpand(saved.id())
                 .toUri();
 
         return ResponseEntity.created(location).body(saved);

@@ -29,14 +29,14 @@ public class LaboratorioService {
         this.validator = validator;
     }
 
-    public Laboratorio save(LaboratorioRegisterDto labDto) {
+    public LaboratorioResponseDto save(LaboratorioRegisterDto labDto) {
 
         Laboratorio lab = mapper.toEntity(labDto);
 
         validator.validate(lab);
+        repository.save(lab);
 
-
-        return repository.save(lab);
+        return mapper.toDto(lab);
     }
 
     public List<LaboratorioResponseDto> search(

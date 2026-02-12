@@ -42,12 +42,18 @@ public class Pedido {
     private String imgArmacao;
 
     //Olho direito
-    @Column(precision = 5, scale = 2)
-    private BigDecimal od;
+    @Column(name = "od_perto", precision = 5, scale = 2)
+    private BigDecimal odPerto;
+
+    @Column(name = "od_longe",precision = 5, scale = 2)
+    private BigDecimal odLonge;
 
     //Olho esquerdo
-    @Column(precision = 5, scale = 2)
-    private BigDecimal oe;
+    @Column(name = "oe_perto",precision = 5, scale = 2)
+    private BigDecimal oePerto;
+
+    @Column(name = "oe_longe",precision = 5, scale = 2)
+    private BigDecimal oeLonge;
 
     //Olho adição
     @Column(precision = 5, scale = 2)
@@ -108,20 +114,36 @@ public class Pedido {
         this.imgArmacao = imgArmacao;
     }
 
-    public BigDecimal getOd() {
-        return od;
+    public BigDecimal getOdPerto() {
+        return odPerto;
     }
 
-    public void setOd(BigDecimal od) {
-        this.od = od;
+    public void setOdPerto(BigDecimal odPerto) {
+        this.odPerto = odPerto;
     }
 
-    public BigDecimal getOe() {
-        return oe;
+    public BigDecimal getOdLonge() {
+        return odLonge;
     }
 
-    public void setOe(BigDecimal oe) {
-        this.oe = oe;
+    public void setOdLonge(BigDecimal odLonge) {
+        this.odLonge = odLonge;
+    }
+
+    public BigDecimal getOePerto() {
+        return oePerto;
+    }
+
+    public void setOePerto(BigDecimal oePerto) {
+        this.oePerto = oePerto;
+    }
+
+    public BigDecimal getOeLonge() {
+        return oeLonge;
+    }
+
+    public void setOeLonge(BigDecimal oeLonge) {
+        this.oeLonge = oeLonge;
     }
 
     public BigDecimal getAd() {

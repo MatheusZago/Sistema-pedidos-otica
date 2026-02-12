@@ -42,7 +42,7 @@ public class PedidoService {
         this.mapper = mapper;
     }
 
-    public Pedido save(PedidoRegisterDto dto) {
+    public PedidoResponseDto save(PedidoRegisterDto dto) {
 
         Cliente cliente = clienteRepository.findById(dto.clienteId())
                 .orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado."));
@@ -53,17 +53,19 @@ public class PedidoService {
         Lente lente = lenteRepository.findById(dto.lenteId())
                 .orElseThrow(() -> new ResourceNotFoundException("Lente não encontrada."));
 
-        Pedido pedidoSalvo = mapper.toEntity(dto, cliente, lab, lente);
+        Pedido pedido = mapper.toEntity(dto, cliente, lab, lente);
+        repository.save(pedido);
 
-        return repository.save(pedidoSalvo);
+        return mapper.toDto(pedido);
     }
 
     public List<PedidoResponseDto> search(Integer id, Integer clienteId, String clienteNome,
                                           String clienteEmail, String clienteTelefone,
                                           Integer labId, String labNome, String labEndereco, String labCnpj,
                                           Integer lenteId, BigDecimal lenteCusto, String lenteTratamento,
-                                          String lenteIndice, String tipoLente, BigDecimal valorVenda,
-                                          String armacao, BigDecimal od, BigDecimal oe, BigDecimal ad, BigDecimal dnp
+                                          String lenteIndice, String tipoLente, BigDecimal valorVenda, String armacao,
+                                          BigDecimal odPerto, BigDecimal odLonge,  BigDecimal oePerto, BigDecimal oeLonge,
+                                          BigDecimal ad, BigDecimal dnp
                                             ){
 
         Specification<Pedido> spec = Specification
@@ -83,8 +85,10 @@ public class PedidoService {
                 .and(PedidosSpecs.tipoLenteLike(tipoLente))
                 .and(PedidosSpecs.valorVendaLenteEqual(valorVenda))
                 .and(PedidosSpecs.armacaoLike(armacao))
-                .and(PedidosSpecs.odEqual(od))
-                .and(PedidosSpecs.oeEqual(oe))
+                .and(PedidosSpecs.odPertoEqual(odPerto))
+                .and(PedidosSpecs.odLongeEqual(odLonge))
+                .and(PedidosSpecs.oePertoEqual(oePerto))
+                .and(PedidosSpecs.oeLongeEqual(oeLonge))
                 .and(PedidosSpecs.adEqual(ad))
                 .and(PedidosSpecs.dnpEqual(dnp));
 

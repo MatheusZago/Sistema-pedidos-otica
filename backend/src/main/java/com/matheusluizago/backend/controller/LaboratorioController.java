@@ -57,15 +57,15 @@ public class LaboratorioController {
                             schema = @Schema(implementation = ErrorResponseDto.class))),
     })
     @PostMapping
-    public ResponseEntity<Laboratorio> save(@RequestBody LaboratorioRegisterDto labDto){
+    public ResponseEntity<LaboratorioResponseDto> save(@RequestBody LaboratorioRegisterDto labDto){
         log.info("Registrando novo laboratório: {}", labDto.nome());
 
-        Laboratorio saved = service.save(labDto);
+        LaboratorioResponseDto saved = service.save(labDto);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(saved.getId())
+                .buildAndExpand(saved.id())
                 .toUri();
 
         return ResponseEntity.created(location).body(saved);
