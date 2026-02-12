@@ -1,11 +1,9 @@
 package com.matheusluizago.backend.controller;
 
-import com.matheusluizago.backend.dto.clienteDto.ClienteResponseDto;
 import com.matheusluizago.backend.dto.errorDto.ErrorResponseDto;
 import com.matheusluizago.backend.dto.lenteDto.LenteRegisterDto;
 import com.matheusluizago.backend.dto.lenteDto.LenteResponseDto;
 import com.matheusluizago.backend.dto.lenteDto.LenteUpdateDto;
-import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.model.Lente;
 import com.matheusluizago.backend.service.LenteService;
 import io.swagger.v3.oas.annotations.Operation;

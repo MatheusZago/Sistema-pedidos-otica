@@ -1,11 +1,9 @@
 package com.matheusluizago.backend.controller;
 
-import com.matheusluizago.backend.dto.clienteDto.ClienteResponseDto;
 import com.matheusluizago.backend.dto.errorDto.ErrorResponseDto;
 import com.matheusluizago.backend.dto.pedidoDto.PedidoRegisterDto;
 import com.matheusluizago.backend.dto.pedidoDto.PedidoResponseDto;
 import com.matheusluizago.backend.dto.pedidoDto.PedidoUpdateDto;
-import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.model.Pedido;
 import com.matheusluizago.backend.service.PedidoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,6 +11,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +22,7 @@ import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
 
+@Tag(name = "Pedidos", description = "Endpoint para gerenciamento de pedidos.")
 @RestController
 @RequestMapping("/pedidos")
 public class PedidoController {
