@@ -63,8 +63,9 @@ public class PedidoService {
                                           String clienteEmail, String clienteTelefone,
                                           Integer labId, String labNome, String labEndereco, String labCnpj,
                                           Integer lenteId, BigDecimal lenteCusto, String lenteTratamento,
-                                          String lenteIndice, String tipoLente, BigDecimal valorVenda,
-                                          String armacao, BigDecimal od, BigDecimal oe, BigDecimal ad, BigDecimal dnp
+                                          String lenteIndice, String tipoLente, BigDecimal valorVenda, String armacao,
+                                          BigDecimal odPerto, BigDecimal odLonge,  BigDecimal oePerto, BigDecimal oeLonge,
+                                          BigDecimal ad, BigDecimal dnp
                                             ){
 
         Specification<Pedido> spec = Specification
@@ -84,8 +85,10 @@ public class PedidoService {
                 .and(PedidosSpecs.tipoLenteLike(tipoLente))
                 .and(PedidosSpecs.valorVendaLenteEqual(valorVenda))
                 .and(PedidosSpecs.armacaoLike(armacao))
-                .and(PedidosSpecs.odEqual(od))
-                .and(PedidosSpecs.oeEqual(oe))
+                .and(PedidosSpecs.odPertoEqual(odPerto))
+                .and(PedidosSpecs.odLongeEqual(odLonge))
+                .and(PedidosSpecs.oePertoEqual(oePerto))
+                .and(PedidosSpecs.oeLongeEqual(oeLonge))
                 .and(PedidosSpecs.adEqual(ad))
                 .and(PedidosSpecs.dnpEqual(dnp));
 

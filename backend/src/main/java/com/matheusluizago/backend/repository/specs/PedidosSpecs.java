@@ -110,16 +110,28 @@ public class PedidosSpecs {
                                 "%" + armacao.toLowerCase() + "%");
     }
 
-    public static Specification<Pedido> odEqual(BigDecimal od){
+    public static Specification<Pedido> odPertoEqual(BigDecimal odPerto){
         return (root, query, criteriaBuilder) ->
-                od == null ? null :
-                        criteriaBuilder.equal(root.get("od"), od);
+                odPerto == null ? null :
+                        criteriaBuilder.equal(root.get("odPerto"), odPerto);
     }
 
-    public static Specification<Pedido> oeEqual(BigDecimal oe){
+    public static Specification<Pedido> odLongeEqual(BigDecimal odLonge){
         return (root, query, criteriaBuilder) ->
-                oe == null ? null :
-                        criteriaBuilder.equal(root.get("oe"), oe);
+                odLonge == null ? null :
+                        criteriaBuilder.equal(root.get("odLonge"), odLonge);
+    }
+
+    public static Specification<Pedido> oePertoEqual(BigDecimal oePerto){
+        return (root, query, criteriaBuilder) ->
+                oePerto == null ? null :
+                        criteriaBuilder.equal(root.get("oePerto"), oePerto);
+    }
+
+    public static Specification<Pedido> oeLongeEqual(BigDecimal oeLonge){
+        return (root, query, criteriaBuilder) ->
+                oeLonge == null ? null :
+                        criteriaBuilder.equal(root.get("oeLonge"), oeLonge);
     }
 
     public static Specification<Pedido> adEqual(BigDecimal ad){

@@ -17,8 +17,10 @@ public record PedidoResponseDto(
         String indice,
         BigDecimal valorVenda,
         String armacao,
-        BigDecimal od,
-        BigDecimal oe,
+        BigDecimal odPerto,
+        BigDecimal odLonge,
+        BigDecimal oePerto,
+        BigDecimal oeLonge,
         BigDecimal ad,
         BigDecimal dnp,
         LocalDateTime createdAt

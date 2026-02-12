@@ -15,10 +15,14 @@ public record PedidoRegisterDto(
         Integer lenteId,
         @Size(min = 3, max = 100, message = "Armação inválida.")
         String armacao,
-        @Digits(integer = 1, fraction = 2, message = "Formato de Od inválido")
-        BigDecimal od,
-        @Digits(integer = 1, fraction = 2, message = "Formato de Oe inválido")
-        BigDecimal oe,
+        @Digits(integer = 1, fraction = 2, message = "Formato de Od de perto inválido")
+        BigDecimal odPerto,
+        @Digits(integer = 1, fraction = 2, message = "Formato de Od de longe perto inválido")
+        BigDecimal odLonge,
+        @Digits(integer = 1, fraction = 2, message = "Formato de Oe de perto inválido")
+        BigDecimal oePerto,
+        @Digits(integer = 1, fraction = 2, message = "Formato de Oe de longe inválido")
+        BigDecimal oeLonge,
         @Digits(integer = 1, fraction = 2, message = "Formato de Ad inválido")
         BigDecimal ad,
         @Digits(integer = 1, fraction = 2, message = "Formato de DNP inválido")

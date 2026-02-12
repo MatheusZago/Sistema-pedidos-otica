@@ -99,8 +99,10 @@ public class PedidoController {
             @RequestParam(value = "tipoLente", required = false) String tipoLente,
             @RequestParam(value = "valorVenda", required = false) BigDecimal valorVenda,
             @RequestParam(value = "armacao", required = false) String armacao,
-            @RequestParam(value = "od", required = false) BigDecimal od,
-            @RequestParam(value = "oe", required = false) BigDecimal oe,
+            @RequestParam(value = "odPerto", required = false) BigDecimal odPerto,
+            @RequestParam(value = "odLonge", required = false) BigDecimal odLonge,
+            @RequestParam(value = "oePerto", required = false) BigDecimal oePerto,
+            @RequestParam(value = "oeLonge", required = false) BigDecimal oeLonge,
             @RequestParam(value = "ad", required = false) BigDecimal ad,
             @RequestParam(value = "dnp", required = false) BigDecimal dnp
 
@@ -110,7 +112,7 @@ public class PedidoController {
                 labId, labNome, labEndereco, labCnpj,
                 lenteId, lenteCusto, lenteTratamento,
                 lenteIndice, tipoLente, valorVenda,
-                armacao, od, oe, ad, dnp
+                armacao, odPerto, odLonge, oePerto, oeLonge, ad, dnp
                 );
 
         return ResponseEntity.ok(list);

@@ -25,8 +25,10 @@ public class PedidoMapper {
         pedido.setLaboratorio(laboratorio);
         pedido.setLente(lente);
         pedido.setArmacao(dto.armacao());
-        pedido.setOd(dto.od());
-        pedido.setOe(dto.oe());
+        pedido.setOdPerto(dto.odPerto());
+        pedido.setOdLonge(dto.odLonge());
+        pedido.setOePerto(dto.oePerto());
+        pedido.setOeLonge(dto.oeLonge());
         pedido.setAd(dto.ad());
         pedido.setDnp(dto.dnp());
 
@@ -50,8 +52,10 @@ public class PedidoMapper {
                 pedido.getLente().getIndice(),
                 pedido.getLente().getValorVenda(),
                 pedido.getArmacao(),
-                pedido.getOd(),
-                pedido.getOe(),
+                pedido.getOdPerto(),
+                pedido.getOdLonge(),
+                pedido.getOePerto(),
+                pedido.getOeLonge(),
                 pedido.getAd(),
                 pedido.getDnp(),
                 pedido.getDateRegister()
@@ -72,11 +76,17 @@ public class PedidoMapper {
         if(dto.armacao() != null){
             pedido.setArmacao(dto.armacao());
         }
-        if(dto.od() != null){
-            pedido.setOd(dto.od());
+        if(dto.odPerto() != null){
+            pedido.setOdPerto(dto.odPerto());
         }
-        if(dto.oe() != null){
-            pedido.setOd(dto.oe());
+        if(dto.oeLonge() != null){
+            pedido.setOdLonge(dto.odLonge());
+        }
+        if(dto.oePerto() != null){
+            pedido.setOePerto(dto.oePerto());
+        }
+        if(dto.oeLonge() != null){
+            pedido.setOeLonge(dto.oeLonge());
         }
         if(dto.ad() != null){
             pedido.setAd(dto.ad());
