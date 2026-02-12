@@ -28,12 +28,13 @@ public class ClienteService {
         this.validator = validator;
     }
 
-    public Cliente save(ClienteRegisterDto clienteDto) {
+    public ClienteResponseDto save(ClienteRegisterDto clienteDto) {
 
         Cliente cliente = mapper.toEntity(clienteDto);
 
         validator.validate(cliente);
-        return repository.save(cliente);
+        repository.save(cliente);
+        return mapper.toDto(cliente);
     }
 
     public List<ClienteResponseDto> search(

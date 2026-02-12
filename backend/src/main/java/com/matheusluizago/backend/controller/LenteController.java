@@ -56,13 +56,13 @@ public class LenteController {
                             schema = @Schema(implementation = ErrorResponseDto.class))),
     })
     @PostMapping
-    public ResponseEntity<Lente> save(@RequestBody @Valid LenteRegisterDto dto){
-        Lente saved = service.save(dto);
+    public ResponseEntity<LenteResponseDto> save(@RequestBody @Valid LenteRegisterDto dto){
+        LenteResponseDto saved = service.save(dto);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(saved.getId())
+                .buildAndExpand(saved.id())
                 .toUri();
 
         return ResponseEntity.created(location).body(saved);

@@ -57,14 +57,14 @@ public class PedidoController {
                             schema = @Schema(implementation = ErrorResponseDto.class))),
     })
     @PostMapping
-    public ResponseEntity<Pedido> save(@RequestBody PedidoRegisterDto dto){
+    public ResponseEntity<PedidoResponseDto> save(@RequestBody PedidoRegisterDto dto){
 
-        Pedido saved = service.save(dto);
+        PedidoResponseDto saved = service.save(dto);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(saved.getId())
+                .buildAndExpand(saved.id())
                 .toUri();
 
         return ResponseEntity.created(location).body(saved);

@@ -37,13 +37,14 @@ public class LenteService {
         this.validator = validator;
     }
 
-    public Lente save(LenteRegisterDto dto){
+    public LenteResponseDto save(LenteRegisterDto dto){
 
         Lente lente = mapper.toEntity(dto);
 
         validator.validate(lente);
+        repository.save(lente);
 
-        return repository.save(lente);
+        return mapper.toDto(lente);
 
     }
 

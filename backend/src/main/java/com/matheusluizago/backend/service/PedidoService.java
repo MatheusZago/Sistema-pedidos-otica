@@ -42,7 +42,7 @@ public class PedidoService {
         this.mapper = mapper;
     }
 
-    public Pedido save(PedidoRegisterDto dto) {
+    public PedidoResponseDto save(PedidoRegisterDto dto) {
 
         Cliente cliente = clienteRepository.findById(dto.clienteId())
                 .orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado."));
@@ -53,9 +53,10 @@ public class PedidoService {
         Lente lente = lenteRepository.findById(dto.lenteId())
                 .orElseThrow(() -> new ResourceNotFoundException("Lente não encontrada."));
 
-        Pedido pedidoSalvo = mapper.toEntity(dto, cliente, lab, lente);
+        Pedido pedido = mapper.toEntity(dto, cliente, lab, lente);
+        repository.save(pedido);
 
-        return repository.save(pedidoSalvo);
+        return mapper.toDto(pedido);
     }
 
     public List<PedidoResponseDto> search(Integer id, Integer clienteId, String clienteNome,
