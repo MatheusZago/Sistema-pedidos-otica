@@ -2,6 +2,7 @@ package com.matheusluizago.backend.factory;
 
 import com.matheusluizago.backend.dto.pedidoDto.PedidoRegisterDto;
 import com.matheusluizago.backend.dto.pedidoDto.PedidoResponseDto;
+import com.matheusluizago.backend.dto.pedidoDto.PedidoUpdateDto;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.model.Laboratorio;
 import com.matheusluizago.backend.model.Lente;
@@ -107,8 +108,6 @@ public class PedidoFactory {
         return pedido;
     }
 
-    //img armacao, od perto, od longe, oe perto, oe longe, ad, dnp, data entrega
-
     //REGISTER DTO
     public static PedidoRegisterDto createValidPedidoRegisterDto(){
         return new PedidoRegisterDto(
@@ -125,10 +124,229 @@ public class PedidoFactory {
                 DEFAULT_DNP,
                 DEFAULT_DATA_ENTREGA
         );
+    }
 
+    public static PedidoRegisterDto createValidPedidoRegisterDtoWithoutOptionalFields(){
+        return new PedidoRegisterDto(
+                1,
+                1,
+                1,
+                DEFAULT_ARMACAO,
+                "",
+                DEFAULT_OD_PERTO,
+                DEFAULT_OD_LONGE,
+                DEFAULT_OE_PERTO,
+                DEFAULT_OE_LONGE,
+                DEFAULT_AD,
+                DEFAULT_DNP,
+                null
+        );
+    }
+
+    public static PedidoRegisterDto createInvalidPedidoRegisterDtoClienteId(){
+        return new PedidoRegisterDto(
+                null,
+                1,
+                1,
+                DEFAULT_ARMACAO,
+                DEFAULT_IMG_ARMACAO,
+                DEFAULT_OD_PERTO,
+                DEFAULT_OD_LONGE,
+                DEFAULT_OE_PERTO,
+                DEFAULT_OE_LONGE,
+                DEFAULT_AD,
+                DEFAULT_DNP,
+                DEFAULT_DATA_ENTREGA
+        );
+    }
+
+    public static PedidoRegisterDto createInvalidPedidoRegisterDtoLabId(){
+        return new PedidoRegisterDto(
+                1,
+                null,
+                1,
+                DEFAULT_ARMACAO,
+                DEFAULT_IMG_ARMACAO,
+                DEFAULT_OD_PERTO,
+                DEFAULT_OD_LONGE,
+                DEFAULT_OE_PERTO,
+                DEFAULT_OE_LONGE,
+                DEFAULT_AD,
+                DEFAULT_DNP,
+                DEFAULT_DATA_ENTREGA
+        );
+    }
+
+    public static PedidoRegisterDto createInvalidPedidoRegisterDtoLenteId(){
+        return new PedidoRegisterDto(
+                1,
+                1,
+                null,
+                DEFAULT_ARMACAO,
+                DEFAULT_IMG_ARMACAO,
+                DEFAULT_OD_PERTO,
+                DEFAULT_OD_LONGE,
+                DEFAULT_OE_PERTO,
+                DEFAULT_OE_LONGE,
+                DEFAULT_AD,
+                DEFAULT_DNP,
+                DEFAULT_DATA_ENTREGA
+        );
+    }
+
+    public static PedidoRegisterDto createInvalidPedidoRegisterDtoArmacao(){
+        return new PedidoRegisterDto(
+                1,
+                1,
+                1,
+                "",
+                DEFAULT_IMG_ARMACAO,
+                DEFAULT_OD_PERTO,
+                DEFAULT_OD_LONGE,
+                DEFAULT_OE_PERTO,
+                DEFAULT_OE_LONGE,
+                DEFAULT_AD,
+                DEFAULT_DNP,
+                DEFAULT_DATA_ENTREGA
+        );
+    }
+
+    public static PedidoRegisterDto createInvalidPedidoRegisterDtoOdPerto(){
+        return new PedidoRegisterDto(
+                1,
+                1,
+                1,
+                DEFAULT_ARMACAO,
+                DEFAULT_IMG_ARMACAO,
+                null,
+                DEFAULT_OD_LONGE,
+                DEFAULT_OE_PERTO,
+                DEFAULT_OE_LONGE,
+                DEFAULT_AD,
+                DEFAULT_DNP,
+                DEFAULT_DATA_ENTREGA
+        );
+    }
+
+    public static PedidoRegisterDto createInvalidPedidoRegisterDtoOdLonge(){
+        return new PedidoRegisterDto(
+                1,
+                1,
+                1,
+                DEFAULT_ARMACAO,
+                DEFAULT_IMG_ARMACAO,
+                DEFAULT_OD_PERTO,
+                null,
+                DEFAULT_OE_PERTO,
+                DEFAULT_OE_LONGE,
+                DEFAULT_AD,
+                DEFAULT_DNP,
+                DEFAULT_DATA_ENTREGA
+        );
+    }
+
+    public static PedidoRegisterDto createInvalidPedidoRegisterDtoOePerto(){
+        return new PedidoRegisterDto(
+                1,
+                1,
+                1,
+                DEFAULT_ARMACAO,
+                DEFAULT_IMG_ARMACAO,
+                DEFAULT_OD_PERTO,
+                DEFAULT_OD_LONGE,
+                null,
+                DEFAULT_OE_LONGE,
+                DEFAULT_AD,
+                DEFAULT_DNP,
+                DEFAULT_DATA_ENTREGA
+        );
+    }
+
+    public static PedidoRegisterDto createInvalidPedidoRegisterDtoOeLonge(){
+        return new PedidoRegisterDto(
+                1,
+                1,
+                1,
+                DEFAULT_ARMACAO,
+                DEFAULT_IMG_ARMACAO,
+                DEFAULT_OD_PERTO,
+                DEFAULT_OD_LONGE,
+                DEFAULT_OE_PERTO,
+                null,
+                DEFAULT_AD,
+                DEFAULT_DNP,
+                DEFAULT_DATA_ENTREGA
+        );
+    }
+
+    public static PedidoRegisterDto createInvalidPedidoRegisterDtoAd(){
+        return new PedidoRegisterDto(
+                1,
+                1,
+                1,
+                DEFAULT_ARMACAO,
+                DEFAULT_IMG_ARMACAO,
+                DEFAULT_OD_PERTO,
+                DEFAULT_OD_LONGE,
+                DEFAULT_OE_PERTO,
+                DEFAULT_OE_LONGE,
+                null,
+                DEFAULT_DNP,
+                DEFAULT_DATA_ENTREGA
+        );
+    }
+
+    public static PedidoRegisterDto createInvalidPedidoRegisterDtoDnp(){
+        return new PedidoRegisterDto(
+                1,
+                1,
+                1,
+                DEFAULT_ARMACAO,
+                DEFAULT_IMG_ARMACAO,
+                DEFAULT_OD_PERTO,
+                DEFAULT_OD_LONGE,
+                DEFAULT_OE_PERTO,
+                DEFAULT_OE_LONGE,
+                DEFAULT_AD,
+                null,
+                DEFAULT_DATA_ENTREGA
+        );
     }
 
     //UPDATE DTO
+    public static PedidoUpdateDto createValidPedidoUpdateDto(){
+        return new PedidoUpdateDto(
+                2,
+                2,
+                2,
+                DEFAULT_ARMACAO,
+                DEFAULT_IMG_ARMACAO,
+                DEFAULT_OD_PERTO,
+                DEFAULT_OD_LONGE,
+                DEFAULT_OE_PERTO,
+                DEFAULT_OE_LONGE,
+                DEFAULT_AD,
+                DEFAULT_DNP,
+                DEFAULT_DATA_ENTREGA
+        );
+    }
+
+    public static PedidoUpdateDto createValidPedidoUpdateDtoWithLessFields(){
+        return new PedidoUpdateDto(
+                null,
+                null,
+                null,
+                null,
+                null,
+                BigDecimal.valueOf(1.50),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+    }
 
     //RESPONSE DTO
     public static PedidoResponseDto createValidPedidoResponseDto(){

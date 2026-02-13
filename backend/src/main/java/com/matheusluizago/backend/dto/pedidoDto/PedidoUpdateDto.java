@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public record PedidoUpdateDto(
         Integer clienteId,
@@ -11,6 +12,8 @@ public record PedidoUpdateDto(
         Integer lenteId,
         @Size(min = 3, max = 100, message = "Armação inválida.")
         String armacao,
+        @Size(min = 3, max = 100, message = "Link da imagem da armação inválida.")
+        String armacaoImg,
         @Digits(integer = 1, fraction = 2, message = "Formato de Od de perto inválido")
         BigDecimal odPerto,
         @Digits(integer = 1, fraction = 2, message = "Formato de Od de longe perto inválido")
@@ -22,6 +25,7 @@ public record PedidoUpdateDto(
         @Digits(integer = 1, fraction = 2, message = "Formato de Ad inválido")
         BigDecimal ad,
         @Digits(integer = 1, fraction = 2, message = "Formato de DNP inválido")
-        BigDecimal dnp
+        BigDecimal dnp,
+        LocalDateTime dataEntrega
 ) {
 }
