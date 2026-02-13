@@ -5,7 +5,7 @@ import com.matheusluizago.backend.dto.clienteDto.ClienteResponseDto;
 import com.matheusluizago.backend.dto.clienteDto.ClienteUpdateDto;
 import com.matheusluizago.backend.model.Cliente;
 
-public class AuthorFactory {
+public class ClienteFactory {
 
     private static final Integer DEFAULT_ID = 1;
     private static final String DEFAULT_NOME = "Matheus";
