@@ -2,31 +2,44 @@ package com.matheusluizago.backend.dto.pedidoDto;
 
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public record PedidoRegisterDto(
-        @NotBlank(message = "Cliente é obrigatório.")
+        @NotNull(message = "Cliente é obrigatório.")
         Integer clienteId,
-        @NotBlank(message = "Laboratório é obrigatório.")
+        @NotNull(message = "Laboratório é obrigatório.")
         Integer laboratorioId,
-        @NotBlank(message = "Lente é obrigatória.")
+        @NotNull(message = "Lente é obrigatória.")
         Integer lenteId,
+        @NotBlank
         @Size(min = 3, max = 100, message = "Armação inválida.")
         String armacao,
-        @Digits(integer = 1, fraction = 2, message = "Formato de Od de perto inválido")
+        @Size(min = 3, max = 200, message = "Link da imagem invalido.")
+        String armacaoImg,
+        @NotNull
+        @Digits(integer = 3, fraction = 2, message = "Formato de Od de perto inválido")
         BigDecimal odPerto,
-        @Digits(integer = 1, fraction = 2, message = "Formato de Od de longe perto inválido")
+        @NotNull
+        @Digits(integer = 3, fraction = 2, message = "Formato de Od de longe perto inválido")
         BigDecimal odLonge,
-        @Digits(integer = 1, fraction = 2, message = "Formato de Oe de perto inválido")
+        @NotNull
+        @Digits(integer = 3, fraction = 2, message = "Formato de Oe de perto inválido")
         BigDecimal oePerto,
-        @Digits(integer = 1, fraction = 2, message = "Formato de Oe de longe inválido")
+        @NotNull
+        @Digits(integer = 3, fraction = 2, message = "Formato de Oe de longe inválido")
         BigDecimal oeLonge,
-        @Digits(integer = 1, fraction = 2, message = "Formato de Ad inválido")
+        @NotNull
+        @Digits(integer = 3, fraction = 2, message = "Formato de Ad inválido")
         BigDecimal ad,
+        @NotNull
         @Digits(integer = 1, fraction = 2, message = "Formato de DNP inválido")
-        BigDecimal dnp
+        BigDecimal dnp,
+
+        LocalDateTime dataEntrega
 
 ) {
 }

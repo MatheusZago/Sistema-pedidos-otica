@@ -31,7 +31,7 @@ public class PedidoMapper {
         pedido.setOeLonge(dto.oeLonge());
         pedido.setAd(dto.ad());
         pedido.setDnp(dto.dnp());
-
+        pedido.setDataEntrega(dto.dataEntrega());
 
         return pedido;
     }
