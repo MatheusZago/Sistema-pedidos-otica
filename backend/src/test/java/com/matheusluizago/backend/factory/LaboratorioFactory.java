@@ -21,6 +21,12 @@ public class LaboratorioFactory {
         return laboratorio;
     }
 
+    public static Laboratorio createValidLaboratorioWithoutId(){
+        Laboratorio laboratorio = createValidLaboratorio();
+        laboratorio.setId(null);
+        return laboratorio;
+    }
+
     public static Laboratorio createInvalidLaboratorioNome(){
         Laboratorio laboratorio = createValidLaboratorio();
         laboratorio.setNome("");
