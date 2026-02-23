@@ -17,13 +17,13 @@ public class ClienteValidator {
     }
 
     public void validate(Cliente cliente){
-        if (existsRegisteredCliente(cliente)) {
+        if (existsRegisteredEmail(cliente)) {
 
-            throw new DuplicateRegisterException("Cliente já registrado");
+            throw new DuplicateRegisterException("Email já em uso.");
         }
     }
 
-    private boolean existsRegisteredCliente(Cliente cliente) {
+    private boolean existsRegisteredEmail(Cliente cliente) {
         Optional<Cliente> clienteEncontrado = repository.findByEmail(cliente.getEmail());
 
         //Cadastro novo

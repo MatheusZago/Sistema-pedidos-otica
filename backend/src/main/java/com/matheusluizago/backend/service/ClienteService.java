@@ -62,9 +62,9 @@ public class ClienteService {
         Cliente cliente = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
 
-        validator.validate(cliente);
-
         mapper.updateCliente(cliente, dto);
+
+        validator.validate(cliente);
 
         Cliente atualizado = repository.save(cliente);
 
