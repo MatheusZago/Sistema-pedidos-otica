@@ -10,6 +10,7 @@ import com.matheusluizago.backend.mapper.ClienteMapper;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.repository.ClienteRepository;
 import com.matheusluizago.backend.validator.ClienteValidator;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -38,11 +39,23 @@ public class ClienteServiceTest {
     @InjectMocks
     private ClienteService service;
 
+    private Cliente cliente;
+    private ClienteRegisterDto registerDto;
+    private ClienteResponseDto responseDto;
+    private ClienteUpdateDto updateDto;
+    private Integer validId = 1;
+    private Integer invalidId = 123123123;
+
+    @BeforeEach
+    void setUp(){
+        cliente = ClienteFactory.createValidCliente();
+        registerDto = ClienteFactory.createValidRegisterClienteDto();
+        responseDto = ClienteFactory.createValidClienteResponseDto();
+        updateDto = ClienteFactory.createValidClienteUpdateDto();
+    }
+
     @Test
     void saveCliente_WithValidData_ShouldSave(){
-        ClienteRegisterDto registerDto = ClienteFactory.createValidRegisterClienteDto();
-        Cliente cliente = ClienteFactory.createValidClienteWithoutId();
-        ClienteResponseDto responseDto = ClienteFactory.createValidClienteResponseDto();
 
         //Mockand comportamento
         when(mapper.toEntity(registerDto)).thenReturn(cliente);
@@ -62,8 +75,6 @@ public class ClienteServiceTest {
 
     @Test
     void saveCliente_WithValidatorException_ShouldNotSave(){
-        ClienteRegisterDto registerDto = ClienteFactory.createValidRegisterClienteDto();
-        Cliente cliente = ClienteFactory.createValidClienteWithoutId();
 
         when(mapper.toEntity(registerDto)).thenReturn(cliente);
 
@@ -78,9 +89,6 @@ public class ClienteServiceTest {
 
     @Test
     void searchCliente_WithFilters_ShouldReturnList() {
-
-        Cliente cliente = ClienteFactory.createValidCliente();
-        ClienteResponseDto responseDto = ClienteFactory.createValidClienteResponseDto();
 
         when(repository.findAll(any(Specification.class))).thenReturn(List.of(cliente));
         when(mapper.toDto(cliente)).thenReturn(responseDto);
@@ -115,19 +123,14 @@ public class ClienteServiceTest {
 
     @Test
     void updateCliente_WithValiData_ShouldReturnUpdatedClient(){
-        Integer id = 1;
 
-        ClienteUpdateDto updateDto = ClienteFactory.createValidClienteUpdateDto();
-        Cliente cliente = ClienteFactory.createValidCliente();
-        ClienteResponseDto responseDto = ClienteFactory.createValidClienteResponseDto();
-
-        when(repository.findById(id)).thenReturn(Optional.of(cliente));
+        when(repository.findById(validId)).thenReturn(Optional.of(cliente));
         when(repository.save(cliente)).thenReturn(cliente);
         when(mapper.toDto(cliente)).thenReturn(responseDto);
 
-        ClienteResponseDto test = service.update(id, updateDto);
+        ClienteResponseDto test = service.update(validId, updateDto);
 
-        verify(repository).findById(id);
+        verify(repository).findById(validId);
         verify(mapper).updateCliente(cliente, updateDto);
         verify(validator).validate(cliente);
         verify(repository).save(cliente);
@@ -138,21 +141,17 @@ public class ClienteServiceTest {
 
     @Test
     void updateCliente_WithDuplicateEmail_ShouldThrowException(){
-        Integer id = 1;
 
-        ClienteUpdateDto updateDto = ClienteFactory.createValidClienteUpdateDto();
-        Cliente cliente = ClienteFactory.createValidCliente();
-
-        when(repository.findById(id)).thenReturn(Optional.of(cliente));
+        when(repository.findById(validId)).thenReturn(Optional.of(cliente));
 
         doThrow(new DuplicateRegisterException("Email já em uso!"))
                 .when(validator).validate(cliente);
 
         assertThrows(DuplicateRegisterException.class,
-                () -> service.update(id, updateDto)
+                () -> service.update(validId, updateDto)
         );
 
-        verify(repository).findById(id);
+        verify(repository).findById(validId);
         verify(mapper).updateCliente(cliente, updateDto);
         verify(validator).validate(cliente);
         verify(repository, never()).save(any());
@@ -161,43 +160,39 @@ public class ClienteServiceTest {
 
     @Test
     void updateCliente_WhenIdNotFound_ShouldThroewException(){
-        Integer id = 12312;
 
-        when(repository.findById(id)).thenReturn(Optional.empty());
+        when(repository.findById(invalidId)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class,
-                () -> service.update(id, ClienteFactory.createValidClienteUpdateDto())
+                () -> service.update(invalidId, ClienteFactory.createValidClienteUpdateDto())
         );
 
-        verify(repository).findById(id);
+        verify(repository).findById(invalidId);
         verify(repository, never()).save(any());
 
     }
 
     @Test
     void deleteCliente_WithValidId_ShouldDelete(){
-        Integer id = 1;
-        Cliente cliente = ClienteFactory.createValidCliente();
 
-        when(repository.findById(id)).thenReturn(Optional.of(cliente));
+        when(repository.findById(validId)).thenReturn(Optional.of(cliente));
 
-        service.delete(id);
+        service.delete(validId);
 
-        verify(repository).findById(id);
+        verify(repository).findById(validId);
         verify(repository).delete(cliente);
     }
 
     @Test
     void deleteCliente_WithInvalidId_ShouldThrowException(){
-        Integer id = 1;
 
-        when(repository.findById(id)).thenReturn(Optional.empty());
+        when(repository.findById(validId)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class,
-                () -> service.delete(id)
+                () -> service.delete(validId)
         );
 
-        verify(repository).findById(id);
+        verify(repository).findById(validId);
         verify(repository, never()).delete(any(Cliente.class));
     }
 

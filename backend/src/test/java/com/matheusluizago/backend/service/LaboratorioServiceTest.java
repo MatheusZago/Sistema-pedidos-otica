@@ -10,6 +10,7 @@ import com.matheusluizago.backend.mapper.LaboratorioMapper;
 import com.matheusluizago.backend.model.Laboratorio;
 import com.matheusluizago.backend.repository.LaboratorioRepository;
 import com.matheusluizago.backend.validator.LaboratorioValidator;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -39,11 +40,23 @@ public class LaboratorioServiceTest {
     @InjectMocks
     private LaboratorioService service;
 
+    private Laboratorio lab;
+    private LaboratorioRegisterDto registerDto;
+    private LaboratorioUpdateDto updateDto;
+    private LaboratorioResponseDto responseDto;
+    private Integer validId = 1;
+    private Integer invalidId = 123123123;
+
+    @BeforeEach
+    void setUp() {
+        lab = LaboratorioFactory.createValidLaboratorio();
+        registerDto = LaboratorioFactory.createValidLaboratorioRegisterDto();
+        updateDto = LaboratorioFactory.createValidLaboratorioUpdateDto();
+        responseDto = LaboratorioFactory.createValidLaboratorioResponseDto();
+    }
+
     @Test
     void saveLaboratorio_WithValidData_ShouldSave(){
-        LaboratorioRegisterDto registerDto = LaboratorioFactory.createValidLaboratorioRegisterDto();
-        Laboratorio lab = LaboratorioFactory.createValidLaboratorio();
-        LaboratorioResponseDto responseDto = LaboratorioFactory.createValidLaboratorioResponseDto();
 
         //Mockand comportamento
         when(mapper.toEntity(registerDto)).thenReturn(lab);
@@ -64,8 +77,6 @@ public class LaboratorioServiceTest {
 
     @Test
     void saveLaboratorio_WithValidatorException_ShouldNotSave(){
-        LaboratorioRegisterDto registerDto = LaboratorioFactory.createValidLaboratorioRegisterDto();
-        Laboratorio lab = LaboratorioFactory.createValidLaboratorio();
 
         when(mapper.toEntity(registerDto)).thenReturn(lab);
 
@@ -80,9 +91,6 @@ public class LaboratorioServiceTest {
 
     @Test
     void searchLaboratorio_WithFilters_ShouldReturnList() {
-
-        Laboratorio lab = LaboratorioFactory.createValidLaboratorio();
-        LaboratorioResponseDto responseDto = LaboratorioFactory.createValidLaboratorioResponseDto();
 
         when(repository.findAll(any(Specification.class))).thenReturn(List.of(lab));
         when(mapper.toDto(lab)).thenReturn(responseDto);
@@ -117,19 +125,15 @@ public class LaboratorioServiceTest {
 
     @Test
     void updateLaboratorio_WithValiData_ShouldReturnUpdatedClient(){
-        Integer id = 1;
 
-        LaboratorioUpdateDto updateDto = LaboratorioFactory.createValidLaboratorioUpdateDto();
-        Laboratorio lab = LaboratorioFactory.createValidLaboratorio();
-        LaboratorioResponseDto responseDto = LaboratorioFactory.createValidLaboratorioResponseDto();
 
-        when(repository.findById(id)).thenReturn(Optional.of(lab));
+        when(repository.findById(validId)).thenReturn(Optional.of(lab));
         when(repository.save(lab)).thenReturn(lab);
         when(mapper.toDto(lab)).thenReturn(responseDto);
 
-        LaboratorioResponseDto test = service.update(id, updateDto);
+        LaboratorioResponseDto test = service.update(validId, updateDto);
 
-        verify(repository).findById(id);
+        verify(repository).findById(validId);
         verify(mapper).updateLab(lab, updateDto);
         verify(validator).validate(lab);
         verify(repository).save(lab);
@@ -140,21 +144,20 @@ public class LaboratorioServiceTest {
 
     @Test
     void updateLaboratorio_WithDuplicateEmail_ShouldThrowException(){
-        Integer id = 1;
 
         LaboratorioUpdateDto updateDto = LaboratorioFactory.createValidLaboratorioUpdateDto();
         Laboratorio lab = LaboratorioFactory.createValidLaboratorio();
 
-        when(repository.findById(id)).thenReturn(Optional.of(lab));
+        when(repository.findById(validId)).thenReturn(Optional.of(lab));
 
         doThrow(new DuplicateRegisterException("CNPJ já em uso!"))
                 .when(validator).validate(lab);
 
         assertThrows(DuplicateRegisterException.class,
-                () -> service.update(id, updateDto)
+                () -> service.update(validId, updateDto)
         );
 
-        verify(repository).findById(id);
+        verify(repository).findById(validId);
         verify(mapper).updateLab(lab, updateDto);
         verify(validator).validate(lab);
         verify(repository, never()).save(any());
@@ -163,43 +166,39 @@ public class LaboratorioServiceTest {
 
     @Test
     void updateLaboratorio_WhenIdNotFound_ShouldThrowException(){
-        Integer id = 12312;
 
-        when(repository.findById(id)).thenReturn(Optional.empty());
+        when(repository.findById(invalidId)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class,
-                () -> service.update(id, LaboratorioFactory.createValidLaboratorioUpdateDto())
+                () -> service.update(invalidId, LaboratorioFactory.createValidLaboratorioUpdateDto())
         );
 
-        verify(repository).findById(id);
+        verify(repository).findById(invalidId);
         verify(repository, never()).save(any());
 
     }
 
     @Test
     void deleteLaboratorio_WithValidId_ShouldDelete(){
-        Integer id = 1;
-        Laboratorio lab = LaboratorioFactory.createValidLaboratorio();
 
-        when(repository.findById(id)).thenReturn(Optional.of(lab));
+        when(repository.findById(validId)).thenReturn(Optional.of(lab));
 
-        service.delete(id);
+        service.delete(validId);
 
-        verify(repository).findById(id);
+        verify(repository).findById(validId);
         verify(repository).delete(lab);
     }
 
     @Test
     void deleteLaboratorio_WithInvalidId_ShouldThrowException(){
-        Integer id = 1;
 
-        when(repository.findById(id)).thenReturn(Optional.empty());
+        when(repository.findById(invalidId)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class,
-                () -> service.delete(id)
+                () -> service.delete(invalidId)
         );
 
-        verify(repository).findById(id);
+        verify(repository).findById(invalidId);
         verify(repository, never()).delete(any(Laboratorio.class));
     }
 
