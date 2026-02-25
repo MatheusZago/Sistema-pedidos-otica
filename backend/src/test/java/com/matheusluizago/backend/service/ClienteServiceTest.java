@@ -38,9 +38,6 @@ public class ClienteServiceTest {
     @InjectMocks
     private ClienteService service;
 
-    Cliente cliente;
-    ClienteResponseDto responseDto;
-
     @Test
     void saveCliente_WithValidData_ShouldSave(){
         ClienteRegisterDto registerDto = ClienteFactory.createValidRegisterClienteDto();

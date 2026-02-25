@@ -63,9 +63,9 @@ public class LaboratorioService {
         Laboratorio laboratorio = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Laboratório não encontrado"));
 
-        validator.validate(laboratorio);
-
         mapper.updateLab(laboratorio, dto);
+
+        validator.validate(laboratorio);
 
         Laboratorio atualizado = repository.save(laboratorio);
 
