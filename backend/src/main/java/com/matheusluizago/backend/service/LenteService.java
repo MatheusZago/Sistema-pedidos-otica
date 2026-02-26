@@ -78,9 +78,9 @@ public class LenteService {
         Lente lente = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Lente não encontrada"));
 
-        validator.validate(lente);
-
         mapper.updateLente(lente, dto);
+
+        validator.validate(lente);
 
         Lente atualizada = repository.save(lente);
 

@@ -1,6 +1,7 @@
 package com.matheusluizago.backend.factory;
 
 import com.matheusluizago.backend.dto.lenteDto.LenteRegisterDto;
+import com.matheusluizago.backend.dto.lenteDto.LenteResponseDto;
 import com.matheusluizago.backend.dto.lenteDto.LenteUpdateDto;
 import com.matheusluizago.backend.model.Lente;
 
@@ -145,8 +146,9 @@ public class LenteFactory {
     }
 
     //RESPONSE DTO
-    public static LenteRegisterDto createValidLenteResponseDto(){
-        return new LenteRegisterDto(
+    public static LenteResponseDto createValidLenteResponseDto(){
+        return new LenteResponseDto(
+                1,
                 DEFAULT_TIPO_LENTE,
                 DEFAULT_CUSTO,
                 DEFAULT_TRATAMENTO,
