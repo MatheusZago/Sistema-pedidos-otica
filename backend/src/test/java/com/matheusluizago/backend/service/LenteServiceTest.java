@@ -45,8 +45,8 @@ public class LenteServiceTest {
     private LenteRegisterDto registerDto;
     private LenteResponseDto responseDto;
     private LenteUpdateDto updateDto;
-    private Integer validId = 1;
-    private Integer invalidId = 123123123;
+    private final Integer validId = 1;
+    private final Integer invalidId = 123123123;
 
     @BeforeEach
     void setUp(){
