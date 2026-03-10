@@ -89,8 +89,8 @@ public class ClienteFactory {
     public static ClienteUpdateDto createValidClienteUpdateDto() {
         return new ClienteUpdateDto(
                 DEFAULT_NOME,
-                DEFAULT_EMAIL,
                 DEFAULT_TELEFONE,
+                DEFAULT_EMAIL,
                 DEFAULT_FOTO
         );
     }

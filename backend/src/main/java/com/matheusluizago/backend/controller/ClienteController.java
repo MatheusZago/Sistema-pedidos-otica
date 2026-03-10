@@ -114,7 +114,7 @@ public class ClienteController {
     @PutMapping("{id}")
     public ResponseEntity<ClienteResponseDto> update(
             @PathVariable Integer id,
-            @RequestBody ClienteUpdateDto dto
+            @RequestBody @Valid ClienteUpdateDto dto
     ){
 
         return ResponseEntity.ok(service.update(id, dto));
@@ -127,7 +127,7 @@ public class ClienteController {
     )
     @ApiResponses(value = {
             @ApiResponse(
-                    responseCode = "201",
+                    responseCode = "204",
                     description = "Cliente deletado com sucesso!"),
             @ApiResponse(
                     responseCode = "404",
@@ -145,5 +145,9 @@ public class ClienteController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+
+
+
 
 }

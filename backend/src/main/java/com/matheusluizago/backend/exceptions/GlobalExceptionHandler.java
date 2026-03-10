@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(DuplicateRegisterException.class)
-    public ResponseEntity<ErrorResponseDto> handleDuplicateRegisterException(DuplicateRegisterException ex){
+    public ResponseEntity<ErrorResponseDto> handleDuplicateRegisterException(DuplicateRegisterException ex) {
 
         ErrorResponseDto error = new ErrorResponseDto(
                 HttpStatus.CONFLICT.value(),
@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ErrorResponseDto> handleReourceNotFoundException(ResourceNotFoundException ex){
+    public ResponseEntity<ErrorResponseDto> handleReourceNotFoundException(ResourceNotFoundException ex) {
 
         ErrorResponseDto error = new ErrorResponseDto(
                 HttpStatus.NOT_FOUND.value(),
@@ -37,7 +37,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponseDto> handleArgumentNotValidException(MethodArgumentNotValidException ex){
+    public ResponseEntity<ErrorResponseDto> handleArgumentNotValidException(MethodArgumentNotValidException ex) {
 
         ErrorResponseDto error = new ErrorResponseDto(
                 HttpStatus.BAD_REQUEST.value(),
@@ -49,7 +49,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<ErrorResponseDto> handleMessageNotReadableException(HttpMessageNotReadableException ex){
+    public ResponseEntity<ErrorResponseDto> handleMessageNotReadableException(HttpMessageNotReadableException ex) {
 
         ErrorResponseDto error = new ErrorResponseDto(
                 HttpStatus.BAD_REQUEST.value(),
@@ -61,7 +61,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<ErrorResponseDto> handleConstraintViolationException(ConstraintViolationException ex){
+    public ResponseEntity<ErrorResponseDto> handleConstraintViolationException(ConstraintViolationException ex) {
 
         ErrorResponseDto error = new ErrorResponseDto(
                 HttpStatus.BAD_REQUEST.value(),
