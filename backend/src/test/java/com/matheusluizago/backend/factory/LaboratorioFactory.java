@@ -54,7 +54,7 @@ public class LaboratorioFactory {
         );
     }
 
-    public static LaboratorioRegisterDto createInalidLaboratorioRegisterDtoNome(){
+    public static LaboratorioRegisterDto createInvalidLaboratorioRegisterDtoNome(){
         return new LaboratorioRegisterDto(
                 "",
                 DEFAULT_ENDERECO,
@@ -62,7 +62,7 @@ public class LaboratorioFactory {
         );
     }
 
-    public static LaboratorioRegisterDto createInalidLaboratorioRegisterDtoEndereco(){
+    public static LaboratorioRegisterDto createInvalidLaboratorioRegisterDtoEndereco(){
         return new LaboratorioRegisterDto(
                 DEFAULT_NOME,
                 "",
@@ -70,7 +70,7 @@ public class LaboratorioFactory {
         );
     }
 
-    public static LaboratorioRegisterDto createInalidLaboratorioRegisterDtoCnpj(){
+    public static LaboratorioRegisterDto createInvalidLaboratorioRegisterDtoCnpj(){
         return new LaboratorioRegisterDto(
                 DEFAULT_NOME,
                 DEFAULT_ENDERECO,
@@ -99,7 +99,7 @@ public class LaboratorioFactory {
         return new LaboratorioUpdateDto(
                 DEFAULT_NOME,
                 DEFAULT_ENDERECO,
-                ""
+                "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         );
     }
 

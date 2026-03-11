@@ -48,8 +48,8 @@ public class ClienteControllerTest {
     private ClienteUpdateDto invalidelefoneUpdateDto;
     private ClienteUpdateDto invalidEmailUpdateDto;
 
-    private Integer validId = 1;
-    private Integer invalidId = 123123123;
+    private final Integer validId = 1;
+    private final Integer invalidId = 123123123;
 
     @BeforeEach
     void setUp(){
@@ -312,5 +312,7 @@ public class ClienteControllerTest {
         mockMvc.perform(delete("/clientes/{id}", "abc"))
                 .andExpect(status().isBadRequest());
     }
+
+
 
 }

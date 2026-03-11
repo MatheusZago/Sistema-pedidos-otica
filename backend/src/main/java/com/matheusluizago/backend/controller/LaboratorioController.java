@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +29,6 @@ import java.util.List;
 public class LaboratorioController {
 
     private final LaboratorioService service;
-    private final Logger log = LoggerFactory.getLogger(LaboratorioController.class);
-
 
     public LaboratorioController(LaboratorioService service){
         this.service = service;
@@ -57,8 +56,7 @@ public class LaboratorioController {
                             schema = @Schema(implementation = ErrorResponseDto.class))),
     })
     @PostMapping
-    public ResponseEntity<LaboratorioResponseDto> save(@RequestBody LaboratorioRegisterDto labDto){
-        log.info("Registrando novo laboratório: {}", labDto.nome());
+    public ResponseEntity<LaboratorioResponseDto> save(@RequestBody @Valid LaboratorioRegisterDto labDto){
 
         LaboratorioResponseDto saved = service.save(labDto);
 
@@ -119,7 +117,7 @@ public class LaboratorioController {
     @PutMapping("{id}")
     public ResponseEntity<LaboratorioResponseDto> update(
             @PathVariable Integer id,
-            @RequestBody LaboratorioUpdateDto dto
+            @RequestBody @Valid LaboratorioUpdateDto dto
     ){
 
         return ResponseEntity.ok(service.update(id, dto));
@@ -132,7 +130,7 @@ public class LaboratorioController {
     )
     @ApiResponses(value = {
             @ApiResponse(
-                    responseCode = "200",
+                    responseCode = "204",
                     description = "Laboratório deletado com sucesso!"),
             @ApiResponse(
                     responseCode = "404",
