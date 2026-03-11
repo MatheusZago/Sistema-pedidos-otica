@@ -8,7 +8,6 @@ import com.matheusluizago.backend.exceptions.DuplicateRegisterException;
 import com.matheusluizago.backend.exceptions.GlobalExceptionHandler;
 import com.matheusluizago.backend.exceptions.ResourceNotFoundException;
 import com.matheusluizago.backend.factory.LaboratorioFactory;
-import com.matheusluizago.backend.model.Laboratorio;
 import com.matheusluizago.backend.service.LaboratorioService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,9 +24,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(LaboratorioController.class)
 @Import(GlobalExceptionHandler.class)
@@ -42,7 +39,6 @@ public class LaboratorioControllerTest {
     @MockBean
     private LaboratorioService laboratorioService;
 
-    private Laboratorio laboratorio;
     private LaboratorioRegisterDto registerDto;
     private LaboratorioRegisterDto invalidNomeRegisterDto;
     private LaboratorioRegisterDto invalidEnderecoRegisterDto;
@@ -56,7 +52,6 @@ public class LaboratorioControllerTest {
 
     @BeforeEach
     void setup(){
-        laboratorio = LaboratorioFactory.createValidLaboratorio();
         registerDto = LaboratorioFactory.createValidLaboratorioRegisterDto();
         invalidNomeRegisterDto = LaboratorioFactory.createInvalidLaboratorioRegisterDtoNome();
         invalidEnderecoRegisterDto = LaboratorioFactory.createInvalidLaboratorioRegisterDtoEndereco();
