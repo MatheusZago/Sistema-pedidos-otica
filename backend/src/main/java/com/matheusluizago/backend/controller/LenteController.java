@@ -129,7 +129,7 @@ public class LenteController {
     )
     @ApiResponses(value = {
             @ApiResponse(
-                    responseCode = "200",
+                    responseCode = "204",
                     description = "Lente deletada com sucesso!"),
             @ApiResponse(
                     responseCode = "404",
