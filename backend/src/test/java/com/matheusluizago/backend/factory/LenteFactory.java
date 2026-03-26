@@ -6,6 +6,7 @@ import com.matheusluizago.backend.dto.lenteDto.LenteUpdateDto;
 import com.matheusluizago.backend.model.Lente;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class LenteFactory {
 
@@ -24,6 +25,7 @@ public class LenteFactory {
         lente.setIndice(DEFAULT_INDICE);
         lente.setTratamento(DEFAULT_TRATAMENTO);
         lente.setValorVenda(DEFAULT_VALOR_VENDA);
+        lente.setDateRegister(LocalDateTime.now());
         return lente;
     }
 

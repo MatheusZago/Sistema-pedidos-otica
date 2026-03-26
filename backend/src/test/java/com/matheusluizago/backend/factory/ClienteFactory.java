@@ -5,6 +5,9 @@ import com.matheusluizago.backend.dto.clienteDto.ClienteResponseDto;
 import com.matheusluizago.backend.dto.clienteDto.ClienteUpdateDto;
 import com.matheusluizago.backend.model.Cliente;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class ClienteFactory {
 
     private static final Integer DEFAULT_ID = 1;
@@ -20,6 +23,7 @@ public class ClienteFactory {
         cliente.setEmail(DEFAULT_EMAIL);
         cliente.setTelefone(DEFAULT_TELEFONE);
         cliente.setFoto(DEFAULT_FOTO);
+        cliente.setDateRegister(LocalDateTime.now());
         return cliente;
     }
 
@@ -30,7 +34,7 @@ public class ClienteFactory {
     }
 
     public static Cliente createInvalidNomeCliente(){
-        Cliente cliente = createInvalidNomeCliente();
+        Cliente cliente = createValidCliente();
         cliente.setNome("");
         return cliente;
     }

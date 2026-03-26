@@ -5,12 +5,15 @@ import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioResponseDto;
 import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioUpdateDto;
 import com.matheusluizago.backend.model.Laboratorio;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class LaboratorioFactory {
 
     private static final Integer DEFAULT_ID = 1;
     private static final String DEFAULT_NOME = "Laboratório A";
     private static final String DEFAULT_ENDERECO = "Endereço A";
-    private static final String DEFAULT_CNPJ = "12345678000195";
+    private static final String DEFAULT_CNPJ = "35369222000160";
 
     public static Laboratorio createValidLaboratorio(){
         Laboratorio laboratorio = new Laboratorio();
@@ -18,6 +21,7 @@ public class LaboratorioFactory {
         laboratorio.setNome(DEFAULT_NOME);
         laboratorio.setEndereco(DEFAULT_ENDERECO);
         laboratorio.setCnpj(DEFAULT_CNPJ);
+        laboratorio.setDateRegister(LocalDateTime.now());
         return laboratorio;
     }
 

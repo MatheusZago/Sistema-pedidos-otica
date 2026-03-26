@@ -9,6 +9,7 @@ import com.matheusluizago.backend.model.Lente;
 import com.matheusluizago.backend.model.Pedido;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class PedidoFactory {
@@ -39,6 +40,8 @@ public class PedidoFactory {
         pedido.setAd(DEFAULT_AD);
         pedido.setDnp(DEFAULT_DNP);
         pedido.setDataEntrega(DEFAULT_DATA_ENTREGA);
+        pedido.setDateRegister(LocalDateTime.now());
+        pedido.setDateUpdate(LocalDateTime.now());
         return pedido;
     }
 

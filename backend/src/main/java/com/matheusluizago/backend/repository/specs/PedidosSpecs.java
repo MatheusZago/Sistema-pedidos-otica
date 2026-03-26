@@ -53,7 +53,8 @@ public class PedidosSpecs {
     public static Specification<Pedido> nomeLaboratorioLike(String nomeLaboratorio){
         return (root, query, criteriaBuilder) ->
                 nomeLaboratorio == null ? null :
-                        criteriaBuilder.like(root.join("laboratorio").get("nome"),
+                        criteriaBuilder.like(
+                                criteriaBuilder.lower(root.join("laboratorio").get("nome")),
                                 "%" + nomeLaboratorio.toLowerCase() + "%");
     }
 
@@ -67,7 +68,8 @@ public class PedidosSpecs {
     public static Specification<Pedido> enderecoLaboratorioLike(String enderecoLaboratorio){
         return (root, query, criteriaBuilder) ->
                 enderecoLaboratorio == null ? null :
-                        criteriaBuilder.like(root.join("laboratorio").get("endereco"),
+                        criteriaBuilder.like(
+                                criteriaBuilder.lower(root.join("laboratorio").get("endereco")),
                                 "%" + enderecoLaboratorio.toLowerCase() + "%");
     }
 
@@ -86,14 +88,16 @@ public class PedidosSpecs {
     public static Specification<Pedido> tratamentoLenteLike(String tratamento){
         return (root, query, criteriaBuilder) ->
                 tratamento == null ? null :
-                        criteriaBuilder.like(root.join("lente").get("tratamento"),
+                        criteriaBuilder.like(
+                                criteriaBuilder.lower(root.join("lente").get("tratamento")),
                                 "%" + tratamento.toLowerCase() + "%");
     }
 
     public static Specification<Pedido> indiceLenteLike(String indice){
         return (root, query, criteriaBuilder) ->
                 indice == null ? null :
-                        criteriaBuilder.like(root.join("lente").get("indice"),
+                        criteriaBuilder.like(
+                                criteriaBuilder.lower(root.join("lente").get("indice")),
                                 "%" + indice.toLowerCase() + "%");
     }
 
@@ -106,7 +110,8 @@ public class PedidosSpecs {
     public static Specification<Pedido> armacaoLike(String armacao){
         return (root, query, criteriaBuilder) ->
                 armacao == null ? null :
-                        criteriaBuilder.like(root.get("armacao"),
+                        criteriaBuilder.like(
+                                criteriaBuilder.lower(root.get("armacao")),
                                 "%" + armacao.toLowerCase() + "%");
     }
 
@@ -150,7 +155,8 @@ public class PedidosSpecs {
     public static Specification<Pedido> tipoLenteLike(String tipoLente){
         return (root, query, criteriaBuilder) ->
                 tipoLente == null ? null :
-                        criteriaBuilder.like(root.get("tipoLente"),
+                        criteriaBuilder.like(
+                                criteriaBuilder.lower(root.join("lente").get("tipoLente")),
                                 "%" + tipoLente.toLowerCase() + "%");
     }
 
