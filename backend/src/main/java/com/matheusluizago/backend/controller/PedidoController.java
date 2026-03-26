@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -57,7 +58,7 @@ public class PedidoController {
                             schema = @Schema(implementation = ErrorResponseDto.class))),
     })
     @PostMapping
-    public ResponseEntity<PedidoResponseDto> save(@RequestBody PedidoRegisterDto dto){
+    public ResponseEntity<PedidoResponseDto> save(@RequestBody @Valid PedidoRegisterDto dto){
 
         PedidoResponseDto saved = service.save(dto);
 
@@ -82,7 +83,7 @@ public class PedidoController {
                             schema = @Schema(implementation = PedidoResponseDto.class))),
     })
     @GetMapping
-    public ResponseEntity<List<PedidoResponseDto>> searchByExample(
+    public ResponseEntity<List<PedidoResponseDto>> search(
             @RequestParam(value = "id", required = false) Integer id,
             @RequestParam(value = "clienteId", required = false) Integer clienteId,
             @RequestParam(value = "clienteNome", required = false) String clienteNome,
@@ -155,7 +156,7 @@ public class PedidoController {
     )
     @ApiResponses(value = {
             @ApiResponse(
-                    responseCode = "201",
+                    responseCode = "204",
                     description = "Pedido deletado com sucesso!"),
             @ApiResponse(
                     responseCode = "404",
@@ -173,5 +174,7 @@ public class PedidoController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+
 
 }
