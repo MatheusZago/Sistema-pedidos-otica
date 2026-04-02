@@ -13,7 +13,7 @@ public class LaboratorioFactory {
     private static final Integer DEFAULT_ID = 1;
     private static final String DEFAULT_NOME = "Laboratório A";
     private static final String DEFAULT_ENDERECO = "Endereço A";
-    private static final String DEFAULT_CNPJ = "35369222000160";
+    private static final String DEFAULT_CNPJ = "11222333000181";
 
     public static Laboratorio createValidLaboratorio(){
         Laboratorio laboratorio = new Laboratorio();

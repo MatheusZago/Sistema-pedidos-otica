@@ -1,6 +1,5 @@
 package com.matheusluizago.backend.repository;
 
-import com.matheusluizago.backend.dto.clienteDto.ClienteRegisterDto;
 import com.matheusluizago.backend.factory.ClienteFactory;
 import com.matheusluizago.backend.model.Cliente;
 import com.matheusluizago.backend.repository.specs.ClienteSpecs;

@@ -5,7 +5,6 @@ import com.matheusluizago.backend.dto.clienteDto.ClienteResponseDto;
 import com.matheusluizago.backend.dto.clienteDto.ClienteUpdateDto;
 import com.matheusluizago.backend.model.Cliente;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class ClienteFactory {
