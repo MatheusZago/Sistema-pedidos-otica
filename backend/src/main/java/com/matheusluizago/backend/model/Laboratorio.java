@@ -1,6 +1,7 @@
 package com.matheusluizago.backend.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.br.CNPJ;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -29,9 +30,19 @@ public class Laboratorio {
     @Column(name = "endereco", length = 150, nullable = false)
     private String endereco;
 
-    @Column(name = "cnpj", length = 150, nullable = false)
+    @Column(name = "cnpj", length = 14, nullable = false)
     @CNPJ
     private String cnpj;
+
+    @Column(name = "email", length = 150, nullable = false, unique = true)
+    private String email;
+
+    @Column(name = "telefone", length = 20)
+    @Pattern(
+            regexp = "^\\+?[0-9()\\-\\s]{8,20}$",
+            message = "Telefone inválido"
+    )
+    private String telefone;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false)
@@ -79,6 +90,28 @@ public class Laboratorio {
 
     public void setDateRegister(LocalDateTime dateRegister) {
         this.dateRegister = dateRegister;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public @Pattern(
+            regexp = "^\\+?[0-9()\\-\\s]{8,20}$",
+            message = "Telefone inválido"
+    ) String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(@Pattern(
+            regexp = "^\\+?[0-9()\\-\\s]{8,20}$",
+            message = "Telefone inválido"
+    ) String telefone) {
+        this.telefone = telefone;
     }
 
     public LocalDateTime getDateUpdate() {

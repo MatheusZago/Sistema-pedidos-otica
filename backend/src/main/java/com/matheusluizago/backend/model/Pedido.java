@@ -1,6 +1,7 @@
 package com.matheusluizago.backend.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -60,7 +61,8 @@ public class Pedido {
     private BigDecimal ad;
 
     //Distãncia Naso Pupilar
-    @Column(precision = 5, scale = 2)
+    @Column(precision = 2, scale = 2)
+    @Digits(integer = 2, fraction = 2, message = "Formato de DNP inválido")
     private BigDecimal dnp;
 
     @Column(name = "data_entrega")

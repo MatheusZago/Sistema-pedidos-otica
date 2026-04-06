@@ -36,7 +36,7 @@ public record PedidoRegisterDto(
         @Digits(integer = 3, fraction = 2, message = "Formato de Ad inválido")
         BigDecimal ad,
         @NotNull
-        @Digits(integer = 1, fraction = 2, message = "Formato de DNP inválido")
+        @Digits(integer = 2, fraction = 2, message = "Formato de DNP inválido")
         BigDecimal dnp,
 
         LocalDateTime dataEntrega

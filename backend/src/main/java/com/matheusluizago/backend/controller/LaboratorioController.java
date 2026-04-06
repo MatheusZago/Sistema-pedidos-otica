@@ -85,10 +85,12 @@ public class LaboratorioController {
             @RequestParam(value = "id", required = false) Integer id,
             @RequestParam(value = "nome", required = false) String nome,
             @RequestParam(value = "endereco", required = false) String endereco,
-            @RequestParam(value = "cnpj", required = false) String cnpj
+            @RequestParam(value = "cnpj", required = false) String cnpj,
+            @RequestParam(value = "email", required = false) String email,
+            @RequestParam(value = "telefone", required = false) String telefone
     ){
 
-        List<LaboratorioResponseDto> list = service.search(id, nome, endereco, cnpj);
+        List<LaboratorioResponseDto> list = service.search(id, nome, endereco, cnpj, email, telefone);
 
         return ResponseEntity.ok(list);
     }

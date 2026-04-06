@@ -15,6 +15,8 @@ public class LaboratorioMapper {
         lab.setNome(dto.nome());
         lab.setEndereco(dto.endereco());
         lab.setCnpj(dto.cnpj());
+        lab.setEmail(dto.email());
+        lab.setTelefone(dto.telefone());
 
         return lab;
     }
@@ -25,7 +27,9 @@ public class LaboratorioMapper {
                 lab.getId(),
                 lab.getNome(),
                 lab.getEndereco(),
-                lab.getCnpj());
+                lab.getCnpj(),
+                lab.getEmail(),
+            lab.getTelefone());
     }
 
     public void updateLab(Laboratorio lab, LaboratorioUpdateDto dto){
@@ -38,6 +42,14 @@ public class LaboratorioMapper {
 
         if(dto.cnpj() != null){
             lab.setCnpj(dto.cnpj());
+        }
+
+        if(dto.email() != null) {
+            lab.setEmail(dto.email());
+        }
+
+        if(dto.telefone() != null) {
+            lab.setTelefone(dto.telefone());
         }
 
     }

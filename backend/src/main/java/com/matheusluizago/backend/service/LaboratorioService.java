@@ -43,13 +43,17 @@ public class LaboratorioService {
             Integer id,
             String nome,
             String endereco,
-            String cnpj
+            String cnpj,
+            String email,
+            String telefone
     ){
         Specification<Laboratorio> spec = Specification
                 .where(LaboratorioSpecs.idEqual(id))
                 .and(LaboratorioSpecs.nomeLike(nome))
                 .and(LaboratorioSpecs.enderecoLike(endereco))
-                .and(LaboratorioSpecs.cnpjLike(cnpj));
+                .and(LaboratorioSpecs.cnpjLike(cnpj))
+                .and(LaboratorioSpecs.emailLike(email))
+                .and(LaboratorioSpecs.telefoneLike(telefone));
 
         return repository.findAll(spec)
                 .stream()

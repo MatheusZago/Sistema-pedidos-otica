@@ -14,6 +14,8 @@ public class LaboratorioFactory {
     private static final String DEFAULT_NOME = "Laboratório A";
     private static final String DEFAULT_ENDERECO = "Endereço A";
     private static final String DEFAULT_CNPJ = "11222333000181";
+    private static final String DEFAULT_EMAIL = "emailtest@email.com";
+    private static final String DEFAULT_TELEFONE = "11999999999";
 
     public static Laboratorio createValidLaboratorio(){
         Laboratorio laboratorio = new Laboratorio();
@@ -21,6 +23,8 @@ public class LaboratorioFactory {
         laboratorio.setNome(DEFAULT_NOME);
         laboratorio.setEndereco(DEFAULT_ENDERECO);
         laboratorio.setCnpj(DEFAULT_CNPJ);
+        laboratorio.setEmail(DEFAULT_EMAIL);
+        laboratorio.setTelefone(DEFAULT_TELEFONE);
         laboratorio.setDateRegister(LocalDateTime.now());
         return laboratorio;
     }
@@ -54,7 +58,9 @@ public class LaboratorioFactory {
         return new LaboratorioRegisterDto(
                 DEFAULT_NOME,
                 DEFAULT_ENDERECO,
-                DEFAULT_CNPJ
+                DEFAULT_CNPJ,
+                DEFAULT_EMAIL,
+                DEFAULT_TELEFONE
         );
     }
 
@@ -62,7 +68,9 @@ public class LaboratorioFactory {
         return new LaboratorioRegisterDto(
                 "",
                 DEFAULT_ENDERECO,
-                DEFAULT_CNPJ
+                DEFAULT_CNPJ,
+                DEFAULT_EMAIL,
+                DEFAULT_TELEFONE
         );
     }
 
@@ -70,7 +78,9 @@ public class LaboratorioFactory {
         return new LaboratorioRegisterDto(
                 DEFAULT_NOME,
                 "",
-                DEFAULT_CNPJ
+                DEFAULT_CNPJ,
+                DEFAULT_EMAIL,
+                DEFAULT_TELEFONE
         );
     }
 
@@ -78,7 +88,9 @@ public class LaboratorioFactory {
         return new LaboratorioRegisterDto(
                 DEFAULT_NOME,
                 DEFAULT_ENDERECO,
-                "12456"
+                "12456",
+                DEFAULT_EMAIL,
+                DEFAULT_TELEFONE
         );
     }
 
@@ -87,7 +99,9 @@ public class LaboratorioFactory {
         return new LaboratorioUpdateDto(
                 DEFAULT_NOME,
                 DEFAULT_ENDERECO,
-                DEFAULT_CNPJ
+                DEFAULT_CNPJ,
+                DEFAULT_EMAIL,
+                DEFAULT_TELEFONE
         );
     }
 
@@ -95,7 +109,9 @@ public class LaboratorioFactory {
         return new LaboratorioUpdateDto(
                 "",
                 DEFAULT_ENDERECO,
-                ""
+                "",
+                DEFAULT_EMAIL,
+                DEFAULT_TELEFONE
         );
     }
 
@@ -103,7 +119,9 @@ public class LaboratorioFactory {
         return new LaboratorioUpdateDto(
                 DEFAULT_NOME,
                 DEFAULT_ENDERECO,
-                "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                DEFAULT_EMAIL,
+                DEFAULT_TELEFONE
         );
     }
 
@@ -112,7 +130,9 @@ public class LaboratorioFactory {
                 DEFAULT_ID,
                 DEFAULT_NOME,
                 DEFAULT_ENDERECO,
-                DEFAULT_CNPJ
+                DEFAULT_CNPJ,
+                DEFAULT_EMAIL,
+                DEFAULT_TELEFONE
         );
     }
 }

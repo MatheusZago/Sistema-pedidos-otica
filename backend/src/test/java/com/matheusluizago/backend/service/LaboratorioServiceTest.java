@@ -95,7 +95,7 @@ public class LaboratorioServiceTest {
         when(repository.findAll(any(Specification.class))).thenReturn(List.of(lab));
         when(mapper.toDto(lab)).thenReturn(responseDto);
 
-        List<LaboratorioResponseDto> test = service.search(1, "Laboratório A", "ndereço A","12345678000195");
+        List<LaboratorioResponseDto> test = service.search(1, "Laboratório A", "ndereço A","12345678000195", null, null);
 
         assertNotNull(test);
         assertEquals(1, test.size());
@@ -113,7 +113,7 @@ public class LaboratorioServiceTest {
                 .thenReturn(List.of());
 
         List<LaboratorioResponseDto> result = service.search(
-                null, "NomeInexistente", null, null
+                null, "NomeInexistente", null, null, null, null
         );
 
         assertNotNull(result);

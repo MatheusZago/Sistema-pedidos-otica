@@ -27,6 +27,9 @@ public class LaboratorioRepositoryTest {
     @BeforeEach
     void setUp() {
         validLaboratorio = LaboratorioFactory.createValidLaboratorioWithoutId();
+        validLaboratorio.setEmail("laboratorioa@email.com");
+        validLaboratorio.setTelefone("11999999999");
+        validLaboratorio.setCnpj("12345678000195"); // CNPJ válido
     }
 
     @Test
@@ -43,7 +46,7 @@ public class LaboratorioRepositoryTest {
     void shouldNotFindLaboratorioByCnpjWhenCnpjDoesNotExist() {
         laboratorioRepository.save(validLaboratorio);
 
-        Optional<Laboratorio> result = laboratorioRepository.findByCnpj("99999999000199");
+        Optional<Laboratorio> result = laboratorioRepository.findByCnpj("19131243000197"); // válido, mas não salvo
 
         assertTrue(result.isEmpty());
     }
@@ -65,11 +68,15 @@ public class LaboratorioRepositoryTest {
         Laboratorio laboratorio1 = LaboratorioFactory.createValidLaboratorioWithoutId();
         laboratorio1.setNome("Laboratório Central");
         laboratorio1.setCnpj("12345678000195");
+        laboratorio1.setEmail("central@email.com");
+        laboratorio1.setTelefone("11911111111");
 
         Laboratorio laboratorio2 = LaboratorioFactory.createValidLaboratorioWithoutId();
         laboratorio2.setNome("Ótica Lab");
-        laboratorio2.setCnpj("98765432000199");
+        laboratorio2.setCnpj("27865757000102");
         laboratorio2.setEndereco("Endereço B");
+        laboratorio2.setEmail("oticalab@email.com");
+        laboratorio2.setTelefone("11922222222");
 
         laboratorioRepository.save(laboratorio1);
         laboratorioRepository.save(laboratorio2);
@@ -88,11 +95,15 @@ public class LaboratorioRepositoryTest {
         laboratorio1.setNome("Laboratório A");
         laboratorio1.setEndereco("Rua das Flores");
         laboratorio1.setCnpj("12345678000195");
+        laboratorio1.setEmail("labA@email.com");
+        laboratorio1.setTelefone("11933333333");
 
         Laboratorio laboratorio2 = LaboratorioFactory.createValidLaboratorioWithoutId();
         laboratorio2.setNome("Laboratório B");
         laboratorio2.setEndereco("Avenida Paulista");
-        laboratorio2.setCnpj("98765432000199");
+        laboratorio2.setCnpj("27865757000102");
+        laboratorio2.setEmail("labB@email.com");
+        laboratorio2.setTelefone("11944444444");
 
         laboratorioRepository.save(laboratorio1);
         laboratorioRepository.save(laboratorio2);
@@ -111,10 +122,14 @@ public class LaboratorioRepositoryTest {
         Laboratorio laboratorio1 = LaboratorioFactory.createValidLaboratorioWithoutId();
         laboratorio1.setNome("Laboratório A");
         laboratorio1.setCnpj("12345678000195");
+        laboratorio1.setEmail("emailteste@email.com");
+        laboratorio1.setTelefone("11955555555");
 
         Laboratorio laboratorio2 = LaboratorioFactory.createValidLaboratorioWithoutId();
         laboratorio2.setNome("Laboratório B");
-        laboratorio2.setCnpj("98765432000199");
+        laboratorio2.setCnpj("19131243000197");
+        laboratorio2.setEmail("laboratoriob@email.com");
+        laboratorio2.setTelefone("11966666666");
 
         laboratorioRepository.save(laboratorio1);
         laboratorioRepository.save(laboratorio2);
@@ -134,11 +149,15 @@ public class LaboratorioRepositoryTest {
         laboratorio1.setNome("Laboratório Central");
         laboratorio1.setEndereco("Rua A");
         laboratorio1.setCnpj("12345678000195");
+        laboratorio1.setEmail("centralA@email.com");
+        laboratorio1.setTelefone("11977777777");
 
         Laboratorio laboratorio2 = LaboratorioFactory.createValidLaboratorioWithoutId();
         laboratorio2.setNome("Laboratório Central");
         laboratorio2.setEndereco("Rua B");
-        laboratorio2.setCnpj("98765432000199");
+        laboratorio2.setCnpj("27865757000102");
+        laboratorio2.setEmail("centralB@email.com");
+        laboratorio2.setTelefone("11988888888");
 
         laboratorioRepository.save(laboratorio1);
         laboratorioRepository.save(laboratorio2);

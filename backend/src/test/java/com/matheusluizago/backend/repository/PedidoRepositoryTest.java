@@ -156,12 +156,17 @@ public class PedidoRepositoryTest {
     void shouldFindPedidoByNomeLaboratorioLike() {
         Laboratorio laboratorio1 = LaboratorioFactory.createValidLaboratorioWithoutId();
         laboratorio1.setNome("Laboratório Central");
+        laboratorio1.setCnpj("12345678000195");
+        laboratorio1.setEmail("laboratoriocentral@email.com");
+        laboratorio1.setTelefone("11999999991");
         laboratorio1 = laboratorioRepository.save(laboratorio1);
 
         Laboratorio laboratorio2 = LaboratorioFactory.createValidLaboratorioWithoutId();
         laboratorio2.setNome("Laboratório B");
         laboratorio2.setCnpj("11222333000181");
         laboratorio2.setEndereco("Endereço B");
+        laboratorio2.setEmail("laboratoriob@email.com");
+        laboratorio2.setTelefone("11999999992");
         laboratorio2 = laboratorioRepository.save(laboratorio2);
 
         Pedido pedido1 = PedidoFactory.createValidPedidoWithoutId();

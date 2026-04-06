@@ -7,6 +7,8 @@ CREATE TABLE laboratorios (
     nome VARCHAR(120) NOT NULL,
     endereco VARCHAR (150) NOT NULL,
     cnpj VARCHAR (14) NOT NULL UNIQUE,
+    email VARCHAR (150) NOT NULL UNIQUE,
+    telefone VARCHAR(20),
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP
 );

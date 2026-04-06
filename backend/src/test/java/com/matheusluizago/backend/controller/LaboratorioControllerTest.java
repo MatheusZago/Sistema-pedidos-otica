@@ -151,7 +151,7 @@ public class LaboratorioControllerTest {
     void searchLaboratorio_WithoutParams_ShouldReturn200AndList() throws Exception {
         List<LaboratorioResponseDto> responseList = List.of(responseDto);
 
-        when(laboratorioService.search(null, null, null, null))
+        when(laboratorioService.search(null, null, null, null, null, null))
                 .thenReturn(responseList);
 
         mockMvc.perform(get("/laboratorios"))
@@ -159,14 +159,14 @@ public class LaboratorioControllerTest {
                 .andExpect(jsonPath("$[0].id").value(responseDto.id()))
                 .andExpect(jsonPath("$[0].nome").value(responseDto.nome()));
 
-        verify(laboratorioService).search(null, null, null, null);
+        verify(laboratorioService).search(null, null, null, null, null, null);
     }
 
     @Test
     void searchLaboratorio_WithIdParam_ShouldReturn200() throws Exception {
         List<LaboratorioResponseDto> responseList = List.of(responseDto);
 
-        when(laboratorioService.search(validId, null, null, null))
+        when(laboratorioService.search(validId, null, null, null, null, null))
                 .thenReturn(responseList);
 
         mockMvc.perform(get("/laboratorios")
@@ -174,14 +174,14 @@ public class LaboratorioControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(responseDto.id()));
 
-        verify(laboratorioService).search(validId, null, null, null);
+        verify(laboratorioService).search(validId, null, null, null, null, null);
     }
 
     @Test
     void searchLaboratorio_WithNomeParam_ShouldReturn200() throws Exception {
         List<LaboratorioResponseDto> responseList = List.of(responseDto);
 
-        when(laboratorioService.search(null, responseDto.nome(), null, null))
+        when(laboratorioService.search(null, responseDto.nome(), null, null, null, null))
                 .thenReturn(responseList);
 
         mockMvc.perform(get("/laboratorios")
@@ -189,14 +189,14 @@ public class LaboratorioControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].nome").value(responseDto.nome()));
 
-        verify(laboratorioService).search(null, responseDto.nome(), null, null);
+        verify(laboratorioService).search(null, responseDto.nome(), null, null, null, null);
     }
 
     @Test
     void searchLaboratorio_WithCnpjParam_ShouldReturn200() throws Exception {
         List<LaboratorioResponseDto> responseList = List.of(responseDto);
 
-        when(laboratorioService.search(null, null, null, responseDto.cnpj()))
+        when(laboratorioService.search(null, null, null, responseDto.cnpj(),null, null))
                 .thenReturn(responseList);
 
         mockMvc.perform(get("/laboratorios")
@@ -204,7 +204,7 @@ public class LaboratorioControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].cnpj").value(responseDto.cnpj()));
 
-        verify(laboratorioService).search(null, null, null, responseDto.cnpj());
+        verify(laboratorioService).search(null, null, null, responseDto.cnpj(), null, null);
     }
 
     @Test

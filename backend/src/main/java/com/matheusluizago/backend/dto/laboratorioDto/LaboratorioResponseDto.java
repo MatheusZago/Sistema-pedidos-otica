@@ -4,6 +4,8 @@ public record LaboratorioResponseDto(
         Integer id,
         String nome,
         String endereco,
-        String cnpj
+        String cnpj,
+        String email,
+        String telefone
 ) {
 }

@@ -38,4 +38,22 @@ public class LaboratorioSpecs {
                                 "%" + cnpj.toLowerCase() + "%"
                         );
     }
+
+    public static Specification<Laboratorio> emailLike(String email){
+        return (root, query, criteriaBuilder) ->
+                email == null ? null:
+                   criteriaBuilder.like(
+                           criteriaBuilder.lower(root.get("email")),
+                           "%" + email.toLowerCase() + "%"
+                   );
+    }
+
+    public static Specification<Laboratorio> telefoneLike(String telefone){
+        return (root, query, criteriaBuilder) ->
+                telefone == null ? null:
+                        criteriaBuilder.like(
+                                criteriaBuilder.lower(root.get("telefone")),
+                                "%" + telefone.toLowerCase() + "%"
+                        );
+    }
 }
