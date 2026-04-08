@@ -100,21 +100,31 @@ public class PedidoService {
     }
 
     @Transactional
-    public PedidoResponseDto update(Integer id, PedidoUpdateDto dto){
+    public PedidoResponseDto update(Integer id, PedidoUpdateDto dto) {
 
         Pedido pedido = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado."));
 
-        Cliente cliente = pedido.getCliente();
-        Laboratorio laboratorio = pedido.getLaboratorio();
-        Lente lente = pedido.getLente();
+        Cliente cliente = dto.clienteId() != null
+                ? clienteRepository.findById(dto.clienteId())
+                .orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado."))
+                : pedido.getCliente();
+
+        Laboratorio laboratorio = dto.laboratorioId() != null
+                ? labRepository.findById(dto.laboratorioId())
+                .orElseThrow(() -> new ResourceNotFoundException("Laboratório não encontrado."))
+                : pedido.getLaboratorio();
+
+        Lente lente = dto.lenteId() != null
+                ? lenteRepository.findById(dto.lenteId())
+                .orElseThrow(() -> new ResourceNotFoundException("Lente não encontrada."))
+                : pedido.getLente();
 
         mapper.updatePedido(pedido, dto, cliente, laboratorio, lente);
 
         Pedido pedidoAtualizado = repository.save(pedido);
 
         return mapper.toDto(pedidoAtualizado);
-
     }
 
     public void delete(Integer id){

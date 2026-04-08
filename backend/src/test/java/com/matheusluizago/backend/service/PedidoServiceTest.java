@@ -192,30 +192,42 @@ public class PedidoServiceTest {
     }
 
     @Test
-    void updatePedido_WithValiData_ShouldReturnUpdatedClient(){
+    void updatePedido_WithValiData_ShouldReturnUpdatedClient() {
+        Pedido pedido = PedidoFactory.createValidPedido();
+        PedidoUpdateDto dto = PedidoFactory.createValidPedidoUpdateDto();
 
-        ArgumentCaptor<Cliente> clienteCaptor = ArgumentCaptor.forClass(Cliente.class);
+        Cliente novoCliente = ClienteFactory.createValidCliente();
+        novoCliente.setId(2);
 
+        Laboratorio novoLaboratorio = LaboratorioFactory.createValidLaboratorio();
+        novoLaboratorio.setId(2);
+        novoLaboratorio.setEmail("laboratorio2@email.com");
+        novoLaboratorio.setCnpj("12345678000195");
 
-        when(repository.findById(validId)).thenReturn(Optional.of(pedido));
-        when(repository.save(pedido)).thenReturn(pedido);
-        when(mapper.toDto(pedido)).thenReturn(responseDto);
+        Lente novaLente = LenteFactory.createValidLente();
+        novaLente.setId(2);
 
-        PedidoResponseDto test = service.update(validId, updateDto);
+        Pedido pedidoAtualizado = PedidoFactory.createValidPedido();
+        pedidoAtualizado.setCliente(novoCliente);
+        pedidoAtualizado.setLaboratorio(novoLaboratorio);
+        pedidoAtualizado.setLente(novaLente);
 
-        verify(repository).findById(validId);
-        verify(mapper).updatePedido(
-                eq(pedido),
-                eq(updateDto),
-                clienteCaptor.capture(),
-                any(Laboratorio.class),
-                any(Lente.class)
-        );
-        verify(repository).save(pedido);
-        verify(mapper).toDto(pedido);
-        assertNotNull(test);
-        assertEquals(responseDto, test);
-        assertEquals(1, clienteCaptor.getValue().getId());
+        when(repository.findById(1)).thenReturn(Optional.of(pedido));
+        when(clienteRepository.findById(2)).thenReturn(Optional.of(novoCliente));
+        when(labRepository.findById(2)).thenReturn(Optional.of(novoLaboratorio));
+        when(lenteRepository.findById(2)).thenReturn(Optional.of(novaLente));
+        when(repository.save(any(Pedido.class))).thenReturn(pedidoAtualizado);
+        when(mapper.toDto(any(Pedido.class))).thenReturn(PedidoFactory.createValidPedidoResponseDto());
+
+        PedidoResponseDto response = service.update(1, dto);
+
+        assertNotNull(response);
+
+        verify(repository).findById(1);
+        verify(clienteRepository).findById(2);
+        verify(labRepository).findById(2);
+        verify(lenteRepository).findById(2);
+        verify(repository).save(any(Pedido.class));
     }
 
     @Test
