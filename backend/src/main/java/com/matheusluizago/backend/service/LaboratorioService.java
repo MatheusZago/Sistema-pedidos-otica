@@ -3,6 +3,7 @@ package com.matheusluizago.backend.service;
 import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioRegisterDto;
 import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioResponseDto;
 import com.matheusluizago.backend.dto.laboratorioDto.LaboratorioUpdateDto;
+import com.matheusluizago.backend.exceptions.DuplicateRegisterException;
 import com.matheusluizago.backend.exceptions.ResourceNotFoundException;
 import com.matheusluizago.backend.mapper.LaboratorioMapper;
 import com.matheusluizago.backend.model.Cliente;
@@ -30,6 +31,14 @@ public class LaboratorioService {
     }
 
     public LaboratorioResponseDto save(LaboratorioRegisterDto labDto) {
+
+        if (repository.findByEmail(labDto.email()).isPresent()) {
+            throw new DuplicateRegisterException("Já existe um laboratório com este email.");
+        }
+
+        if (repository.findByCnpj(labDto.cnpj()).isPresent()) {
+            throw new DuplicateRegisterException("Já existe um laboratório com este CNPJ.");
+        }
 
         Laboratorio lab = mapper.toEntity(labDto);
 

@@ -1,6 +1,8 @@
 package com.matheusluizago.backend.repository;
 
 import com.matheusluizago.backend.model.Laboratorio;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -8,4 +10,6 @@ import java.util.Optional;
 
 public interface LaboratorioRepository extends JpaRepository<Laboratorio, Integer>, JpaSpecificationExecutor<Laboratorio> {
     Optional<Laboratorio> findByCnpj(String cnpj);
+
+    Optional<Laboratorio> findByEmail(String email);
 }
