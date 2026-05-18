@@ -2,8 +2,6 @@ package com.matheusluizago.backend.model;
 
 import com.matheusluizago.backend.model.enums.Role;
 import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -23,6 +21,9 @@ public class Usuario {
             allocationSize = 1
     )
     private Integer id;
+
+    @Column(nullable = false, unique = true, length = 50)
+    private String username;
 
     @Column(nullable = false, unique = true)
     private String email;
